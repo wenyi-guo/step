@@ -11,6 +11,7 @@
   </head>
   <body>
         <h1 class="center">My Portfolio</h1>
+        <!-- Create the tab-bar at the top -->
         <div class="container-fluid"> 
             <ul class="nav nav-tabs" id="myTab" role="tablist" aria-label="tabs">
                 <li class="nav-item">
@@ -25,7 +26,10 @@
             </ul>
         </div>
 
+        <!-- Add the tab content for three tabs -->
         <div class="tab-content">
+
+            <!-- The tab for about me information -->
             <div class="container-fluid tab-pane fade show active" role="tabpanel" aria-labelledby="tab-about" id="about"> 
                 <div class="row">
                     <h2>About</h2>
@@ -50,11 +54,13 @@
                 </div>
             </div>
         
+            <!-- The tab for the projects I did -->
             <div class="container-fluid tab-pane fade" role="tabpanel" aria-labelledby="tab-projects" id="projects"> 
                 <div class="row">
                     <h2>Projects</h2>
                 </div>
 
+                <!-- Add the projects with collapible description. -->
                 <div class="row">
                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 center-block text-center">  
                         <div class="collapsible btn border border-info"><h3>Minibot Blockly Data Analytics</h3></div>
@@ -101,8 +107,50 @@
                 </div>
             </div>
 
+            <!-- The tab for image gallery -->
             <div class="container-fluid tab-pane fade" role="tabpanel" aria-labelledby="tab-gallery" id="gallery"> 
-                
+                <div class="container-fluid"> 
+                    <div class="row">
+                        <p>The gallery contains photos I took and photos of me.</p>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 center-block text-center align-middle">  
+                            <img class="img-fluid img-thumbnail rounded" src="images/IMG_2002.jpg"/>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 center-block text-center align-middle"> 
+                            <img class="img-fluid img-thumbnail rounded" src="images/IMG_2457.jpg"/>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 center-block text-center align-middle"> 
+                            <img class="img-fluid img-thumbnail rounded" src="images/IMG_2270.jpg"/>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 center-block text-center align-middle"> 
+                            <img class="img-fluid img-thumbnail rounded" src="images/DSC03870.jpg"/>
+                            
+                        </div>
+                       <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 center-block text-center align-middle"> 
+                            <img class="img-fluid img-thumbnail rounded" src="images/IMG_2627_1.jpg"/>
+                        </div>
+                       <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 center-block text-center align-middle"> 
+                            <img class="img-fluid img-thumbnail rounded" src="images/IMG_2636_1.jpg"/>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 center-block text-center align-middle"> 
+                            <img class="img-fluid img-thumbnail rounded" src="images/IMG_1969.jpg"/>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 center-block text-center align-middle"> 
+                            <img class="img-fluid img-thumbnail rounded" src="images/DSC03876.jpg"/>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 center-block text-center align-middle"> 
+                            <img class="img-fluid img-thumbnail rounded" src="images/IMG_1243.jpg"/>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
             
