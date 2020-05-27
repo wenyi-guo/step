@@ -1,9 +1,48 @@
-#content {
-  margin-left: auto;
-  margin-right: auto;
-  width: 650px;
+/* Style the center class to center the text inside. */
+.center {
+    text-align: center;
 }
 
-#greeting-container {
-  margin-top: 20px;
+/* Style the container-fluid to be center in range in the middle. */
+.container-fluid {
+    width: 65%;
 }
+
+/* Style for animated collasible content, default is hidden,  */
+.collapse-content {
+  padding: 0 18px;
+  background-color: white;
+  max-height: 0;
+  width: 90%;
+  overflow: hidden;
+  transition: max-height 0.2s ease-out;
+}
+
+/* Style to add a plus sign for collapsible buttons when content is collapsing. */
+.collapsible:after {
+  content: '\02795'; /* Unicode character for "plus" sign (+) */
+  font-size: 13px;
+  color: white;
+  float: right;
+  margin-left: 5px;
+}
+
+/* Style to add a minus sign for collapsible buttons when content is showing. */
+.collapse-active:after {
+  content: "\2796"; /* Unicode character for "minus" sign (-) */
+}
+
+/* Style class btn to customize the button. */
+.btn {
+    width: 90%;
+    height: 100px;
+    text-align: center;
+    border-radius: 25px;
+    padding: 20px 20px;
+    margin: 30px;
+    background-color: #F0FFFF;
+}
+
+
+
+
