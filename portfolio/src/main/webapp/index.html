@@ -3,16 +3,157 @@
   <head>
     <meta charset="UTF-8">
     <title>My Portfolio</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css">
-    <script src="script.js"></script>
   </head>
   <body>
-    <div id="content">
-      <h1>My Portfolio</h1>
-      <p>This is my portfolio.</p>
-      <p>Click here to get a random message:</p>
-      <button onclick="addRandomGreeting()">Hello</button>
-      <div id="greeting-container"></div>
-    </div>
+        <h1 class="center">My Portfolio</h1>
+        <!-- Create the tab-bar at the top -->
+        <div class="container-fluid"> 
+            <ul class="nav nav-tabs" id="myTab" role="tablist" aria-label="tabs">
+                <li class="nav-item">
+                    <a class="nav-link active" id="tab-about" data-toggle="tab" href="#about" role="tab" aria-controls="about" aria-selected="true">About</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="tab-projects" data-toggle="tab" href="#projects" role="tab" aria-controls="projects" aria-selected="false">Projects</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="tab-gallery" data-toggle="tab" href="#gallery" role="tab" aria-controls="gallery" aria-selected="false">Gallery</a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Add the tab content for three tabs -->
+        <div class="tab-content">
+
+            <!-- The tab for about me information -->
+            <div class="container-fluid tab-pane fade show active" role="tabpanel" aria-labelledby="tab-about" id="about"> 
+                <div class="row">
+                    <h2>About</h2>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 align-middle">
+                        <img class="img-fluid img-thumbnail rounded" height=512, width=341.25, src="images/DSC04294.jpg"/>
+                    </div>
+                    <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8 align-middle">
+                        <p>Hi, this is Wenyi Guo! </p>
+                        <p>I'm an undergraduate stuent at Cornell University class of 2022. My majors are computer science and mathematics. 
+                            I like programming as well as the theoratical knowledge.</p>
+                        <p>I'm a developer, a programmer,a dancer, a photographer, and a learner. I hope to create a better world with new ideas;
+                            I hope to build more convenient tools with coding; I hope everywhere I dance will grow flowers; I hope every scene 
+                            I shot would be eternal.</p>
+                        <p>I love cats but I don' have one. </p>
+                        <P>I love travelling and have been to many places.</p>
+                        <p><a href="https://linkedin.com/in/wenyiguo~/">Connect me on LinkedIn</a></br>
+                        <a href="https://github.com/wenyi-guo">Check out my github</a></p>
+                    </div>
+                </div>
+            </div>
+        
+            <!-- The tab for the projects I did -->
+            <div class="container-fluid tab-pane fade" role="tabpanel" aria-labelledby="tab-projects" id="projects"> 
+                <div class="row">
+                    <h2>Projects</h2>
+                </div>
+
+                <!-- Add the projects with collapible description. -->
+                <div class="row">
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 center-block text-center">  
+                        <div class="collapsible btn border border-info"><h3>Minibot Blockly Data Analytics</h3></div>
+                        <div class="collapse-content">
+                            <p>This is the project for Cornell Cup Robotics CS team, aiming to provide analytics based on the programs students write for Minibot. I implemented
+                                the user login feature and user dashboard which contains important statistics and visualizations about students' coding ability to help them
+                                improce.</p>
+                            <a href="https://github.com/cornell-cup/cs-reminibot">here</a>
+                        </div>
+                    </div>
+                    
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 center-block text-center">
+                        <div class="collapsible btn border border-info"><h3>LittleSecret</h3></div>
+                        <div class="collapse-content">
+                            <p>In LittleSecret, you can add your friends and share secrets with your friends without letting them know who you are. You can login first with
+                                registered email address. THen, you can post secress and add friends. You could see all the secret posts from your friends but you don't know
+                                who post them.
+                            </P>
+                            <a href="https://github.com/wenyi-guo/LittleSecret">here</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 center-block text-center">  
+                        <div class="collapsible btn border border-info "><h3>Freefood</h3></div>
+                        <div class="collapse-content">
+                            <p>freefood is an app that can be used to find the nearing events that offer freefood at Cornell. The user can just launch the app and see 
+                                what events at Cornell offer free food, and they can choose to only display the events at a certain part of the campus, they can also f
+                                ilter the events by dates for about one week's range. Users can click into the event to check the details and see the location of the event in Map.
+                                They can mark favourite events. 
+                                </p>
+                            <a href="https://github.com/Xiuyu-Li/freefood">here</a>
+                        </div>
+                    </div>
+                    
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 center-block text-center">
+                        <div class="collapsible btn border border-info"><h3>House Price Prediction</h3></div>
+                        <div class="collapse-content">
+                            <p>We aim to predict the future house sale prices given the data of house sale prices in Ames, Iowa based on 79 explanatory variables. The results 
+                            can be used for customers to decide whether they should invest an estate and how much profit they might earn from this investment in the future.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- The tab for image gallery -->
+            <div class="container-fluid tab-pane fade" role="tabpanel" aria-labelledby="tab-gallery" id="gallery"> 
+                <div class="container-fluid"> 
+                    <div class="row">
+                        <p>The gallery contains photos I took and photos of me.</p>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 center-block text-center align-middle">  
+                            <img class="img-fluid img-thumbnail rounded" src="images/IMG_2002.jpg"/>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 center-block text-center align-middle"> 
+                            <img class="img-fluid img-thumbnail rounded" src="images/IMG_2457.jpg"/>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 center-block text-center align-middle"> 
+                            <img class="img-fluid img-thumbnail rounded" src="images/IMG_2270.jpg"/>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 center-block text-center align-middle"> 
+                            <img class="img-fluid img-thumbnail rounded" src="images/DSC03870.jpg"/>
+                            
+                        </div>
+                       <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 center-block text-center align-middle"> 
+                            <img class="img-fluid img-thumbnail rounded" src="images/IMG_2627_1.jpg"/>
+                        </div>
+                       <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 center-block text-center align-middle"> 
+                            <img class="img-fluid img-thumbnail rounded" src="images/IMG_2636_1.jpg"/>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 center-block text-center align-middle"> 
+                            <img class="img-fluid img-thumbnail rounded" src="images/IMG_1969.jpg"/>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 center-block text-center align-middle"> 
+                            <img class="img-fluid img-thumbnail rounded" src="images/DSC03876.jpg"/>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 center-block text-center align-middle"> 
+                            <img class="img-fluid img-thumbnail rounded" src="images/IMG_1243.jpg"/>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+            
+  <script src="script.js"></script>
   </body>
 </html>
