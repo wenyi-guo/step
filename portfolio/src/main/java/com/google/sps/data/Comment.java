@@ -16,4 +16,16 @@ public class Comment{
         this.email = email;
         this.content = content;
     }
+
+    public String getUserName(){
+        return this.userName;
+    }
+
+    public String getEmail(){
+        return this.email;
+    }
+
+    public String getContent(){
+        return this.email;
+    }
 }

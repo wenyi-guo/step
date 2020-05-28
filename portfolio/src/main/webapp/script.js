@@ -34,21 +34,18 @@ for (i = 0; i < collapse.length; i++) {
  * Fetch the data from server then add it to the page.
  */
  function getData() {
-  fetch('/comments').then(response => response.json()).then((comments) =>  {
+  fetch('/get-comments').then(response => response.json()).then((comments) =>  {
     console.log(comments);
-    var list = comments.data.comments;
-    const commentsElement = document.getElementById('comments-container');
-    commentsElement.innerHTML = '';
-    for(i in list){
-        commentsElement.appendChild(
-        createListElement(list[i].userName + " " + list[i].email + '\n' + list[i].content));
-    }
+    const commentListElement = document.getElementById('comments-container');
+    comments.forEach((comment) => {
+      commentListElement.appendChild(createListElement(comment));
+    })
   });
 }
 
 /** Creates an <li> element containing text. */
 function createListElement(text) {
   const liElement = document.createElement('li');
-  liElement.innerText = text;
+  liElement.innerText = "User Name: " + text.userName + "   Email: " + text.email + "\n" + "Comment: " + text.content;
   return liElement;
 }
