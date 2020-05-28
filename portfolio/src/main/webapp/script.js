@@ -30,14 +30,25 @@ for (i = 0; i < collapse.length; i++) {
   });
 }
 
-
-
 /**
  * Fetch the data from server then add it to the page.
  */
  function getData() {
-  fetch('/data').then(response => response.text()).then((hello) =>  {
-    console.log(hello);
-    document.getElementById('hello-container').innerText = hello;
+  fetch('/comments').then(response => response.json()).then((comments) =>  {
+    console.log(comments);
+    var list = comments.data.comments;
+    const commentsElement = document.getElementById('comments-container');
+    commentsElement.innerHTML = '';
+    for(i in list){
+        commentsElement.appendChild(
+        createListElement(list[i].userName + " " + list[i].email + '\n' + list[i].content));
+    }
   });
+}
+
+/** Creates an <li> element containing text. */
+function createListElement(text) {
+  const liElement = document.createElement('li');
+  liElement.innerText = text;
+  return liElement;
 }
