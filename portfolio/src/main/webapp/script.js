@@ -30,22 +30,19 @@ for (i = 0; i < collapse.length; i++) {
   });
 }
 
-
-
 /**
  * Fetch the data from server then add it to the page.
  */
  function getData() {
-  fetch('/data').then(response => response.json()).then((comments) =>  {
+  fetch('/comments').then(response => response.json()).then((comments) =>  {
     console.log(comments);
-    const commentsElement = document.getElementById('hello-container');
+    var list = comments.data.comments;
+    const commentsElement = document.getElementById('comments-container');
     commentsElement.innerHTML = '';
-    commentsElement.appendChild(
-        createListElement('1: ' + comments.data[0].userName + ': ' + comments.data[0].content));
-    commentsElement.appendChild(
-        createListElement('2: ' + comments.data[1].userName + ': ' + comments.data[1].content));
-    commentsElement.appendChild(
-        createListElement('3: ' + comments.data[2].userName + ': ' + comments.data[2].content));
+    for(i in list){
+        commentsElement.appendChild(
+        createListElement(list[i].userName + " " + list[i].email + '\n' + list[i].content));
+    }
   });
 }
 

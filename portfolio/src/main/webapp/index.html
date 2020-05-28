@@ -50,9 +50,23 @@
                         <P>I love travelling and have been to many places.</p>
                         <p><a href="https://linkedin.com/in/wenyiguo~/">Connect me on LinkedIn</a></br>
                         <a href="https://github.com/wenyi-guo">Check out my github</a></p>
-                        <p> here. </p>
-                        <div id="hello-container"><h1></h1></div>
                     </div>
+                </div>
+
+                <div class="row align-middle center">
+                     <form action="/comments" method="POST">
+                        <p>Enter Your Comment Here</p>
+                        <label>User Name: </label><input type="text" name="user-name"><br/>
+                        <label>Email Address: </label><input type="text" name="email"><br/>
+                        <label>Comment: </label><input type="text" name="content">
+                        <br/><br/>
+                        <input type="submit" />
+                    </form>
+                </div>
+
+                <div class="row center">
+                    <h3>Comments</h3>
+                    <div id="comments-container"></div>
                 </div>
             </div>
         

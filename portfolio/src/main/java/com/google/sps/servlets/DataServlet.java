@@ -13,6 +13,9 @@
 // limitations under the License.
 
 package com.google.sps.servlets;
+import com.google.sps.data.Comment;
+import com.google.sps.data.Comments;
+
 import com.google.gson.Gson;
 import java.io.IOException;
 import javax.servlet.annotation.WebServlet;
@@ -24,37 +27,28 @@ import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
-@WebServlet("/data")
+@WebServlet("/comments")
 public class DataServlet extends HttpServlet {
-    /**
-    * The class of type Comment, including user name, email, and content.
-    */
-    private class Comment{
-        String userName;
-        String email;
-        String content;
-
-        public Comment(String userName, String email, String content){
-            this.userName = userName;
-            this.email = email;
-            this.content = content;
-        }
-    }
-
+    private Comments comments = new Comments();
     @Override
     public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-        JSONObject comments = new JSONObject();
-        ArrayList<Comment> list = new ArrayList<Comment>(); 
-        list.add(new Comment("wenyiguo", "wenyiguo@google.com", "First comment!"));
-        list.add(new Comment("julialiu", "juliasliu@google.com", "Second comment!"));
-        list.add(new Comment("prashantmalyala", "mvprashant@google.com", "Third comment!"));
-      
-        comments.put("data", list);
-
-        String json = convertToJsonUsingGson(comments);
+        JSONObject commentsdata = new JSONObject();
+        commentsdata.put("data", comments);
+        String json = convertToJsonUsingGson(commentsdata);
     
         response.setContentType("application/json;");
         response.getWriter().println(json);
+    }
+
+    @Override
+    public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        // Get the input from the form.
+        Comment userComment = getUserComment(request);
+
+        comments.addComment(userComment);
+
+        // Redirect back to the HTML page.
+        response.sendRedirect("/index.html");
     }
 
    /**
@@ -64,5 +58,16 @@ public class DataServlet extends HttpServlet {
     Gson gson = new Gson();
     String json = gson.toJson(comments);
     return json;
+  }
+
+  /** Returns the comment entered by the user. */
+  private Comment getUserComment(HttpServletRequest request) {
+    // Get the input from the form.
+    String userName = request.getParameter("user-name");
+    String email = request.getParameter("email");
+    String content = request.getParameter("content");
+
+    Comment comment = new Comment(userName, email, content);
+    return comment;
   }
 }
