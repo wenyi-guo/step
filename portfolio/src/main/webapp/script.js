@@ -29,3 +29,15 @@ for (i = 0; i < collapse.length; i++) {
     }
   });
 }
+
+
+
+/**
+ * Fetch the data from server then add it to the page.
+ */
+ function getData() {
+  fetch('/data').then(response => response.text()).then((hello) =>  {
+    console.log(hello);
+    document.getElementById('hello-container').innerText = hello;
+  });
+}
