@@ -34,14 +34,15 @@ for (i = 0; i < collapse.length; i++) {
  * Fetch the data from server then add it to the page.
  */
  function getData() {
-  fetch('/comments').then(response => response.json()).then((comments) =>  {
+  fetch('/get-comments').then(response => response.json()).then((comments) =>  {
     console.log(comments);
-    var list = comments.data.comments;
-    const commentsElement = document.getElementById('comments-container');
-    commentsElement.innerHTML = '';
-    for(i in list){
-        commentsElement.appendChild(
-        createListElement(list[i].userName + " " + list[i].email + '\n' + list[i].content));
+    const commentListElement = document.getElementById('comments-container');
+    if(comments.length === 0){
+        commentListElement.innerText="No comment yet.";   
+    } else{
+        comments.forEach((comment) => {
+        commentListElement.appendChild(createListElement(comment));
+        })
     }
   });
 }
@@ -49,6 +50,20 @@ for (i = 0; i < collapse.length; i++) {
 /** Creates an <li> element containing text. */
 function createListElement(text) {
   const liElement = document.createElement('li');
-  liElement.innerText = text;
+  liElement.innerText = "User Name: " + text.userName + "   Email: " + text.email + "\n" + "Comment: " + text.content;
   return liElement;
+}
+
+function deleteData(){
+fetch("delete-comments", {method: 'POST'})
+  .then(response => {
+    if (response.status === 200) {
+      console.log("success");
+      getData();
+      return response.json();
+    } else {
+      console.log("fail");
+      throw new Error('Something went wrong on api server!');
+    }
+  });
 }
