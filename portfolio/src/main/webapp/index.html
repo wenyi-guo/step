@@ -65,17 +65,24 @@
                 </div>
 
                 <div class="row">
-                    <h3>Comments</h3>
+                    <h3>Comments</h3><br>
+                    <input class="button btn-primary" type="button" value="Clear Comments" onclick="deleteData()">
+                </div>
+
+                <div class="row">
                     <form action="/get-comments" method="POST">
                         <label for="num"> Number of comments to display (between 5 and 10):</label>
                         <input type="number" id="num" name="num" min="5" max="10">
                         <input type="submit">
                     </form>
-                    <!-- <label>Number of Comments: <div id="num-container">5</div></label> -->
-                    <div id="comments-container"></div>
+                </div>
+                
+                <div class="row">
+                    <div id="comments-container"><p></P></div>
                 </div>
             </div>
-        
+
+  
             <!-- The tab for the projects I did -->
             <div class="container-fluid tab-pane fade" role="tabpanel" aria-labelledby="tab-projects" id="projects"> 
                 <div class="row">

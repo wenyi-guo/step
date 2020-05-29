@@ -64,7 +64,9 @@ public class ListCommentsServlet extends HttpServlet {
       Comment comment = new Comment(userName, email, content);
       comments.add(comment);
     }
-    comments = comments.subList(0, num);
+    if(comments.size() > num){
+        comments = comments.subList(0, num);
+    }
 
     Gson gson = new Gson();
 

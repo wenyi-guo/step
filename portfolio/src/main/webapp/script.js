@@ -37,9 +37,13 @@ for (i = 0; i < collapse.length; i++) {
   fetch('/get-comments').then(response => response.json()).then((comments) =>  {
     console.log(comments);
     const commentListElement = document.getElementById('comments-container');
-    comments.forEach((comment) => {
-      commentListElement.appendChild(createListElement(comment));
-    })
+    if(comments.length === 0){
+        commentListElement.innerText="No comment yet.";   
+    } else{
+        comments.forEach((comment) => {
+        commentListElement.appendChild(createListElement(comment));
+        })
+    }
   });
 }
 
@@ -48,4 +52,18 @@ function createListElement(text) {
   const liElement = document.createElement('li');
   liElement.innerText = "User Name: " + text.userName + "   Email: " + text.email + "\n" + "Comment: " + text.content;
   return liElement;
+}
+
+function deleteData(){
+fetch("delete-comments", {method: 'POST'})
+  .then(response => {
+    if (response.status === 200) {
+      console.log("success");
+      getData();
+      return response.json();
+    } else {
+      console.log("fail");
+      throw new Error('Something went wrong on api server!');
+    }
+  });
 }
