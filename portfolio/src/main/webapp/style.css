@@ -43,6 +43,33 @@
     background-color: #F0FFFF;
 }
 
+.btn-primary {
+    background-color: #66ccff;
+    border-radius: 5px;
+    border: none;
+    margin: 0px 20px; 
+}
+
+/* Style the pagination buttons. */
+.pagination {
+  display: inline-block;
+}
+
+.pagination a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  border-radius: 5px;
+}
+
+.pagination a.active {
+  background-color: #66ccff;
+  color: white;
+  border-radius: 5px;
+}
+
+.pagination a:hover:not(.active) {background-color: #ddd;}
 
 
 

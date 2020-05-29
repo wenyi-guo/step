@@ -49,8 +49,10 @@ for (i = 0; i < collapse.length; i++) {
 
 /** Creates an <li> element containing text. */
 function createListElement(text) {
-  const liElement = document.createElement('li');
-  liElement.innerText = "User Name: " + text.userName + "   Email: " + text.email + "\n" + "Comment: " + text.content;
+  const liElement = document.createElement('div');
+  liElement.classList.add('row');
+  liElement.innerText = "User Name: " + text.userName + "   Email: " + text.email + "\n" + "Comment: " + text.content + "<br>";
+ 
   return liElement;
 }
 
@@ -67,3 +69,4 @@ fetch("delete-comments", {method: 'POST'})
     }
   });
 }
+

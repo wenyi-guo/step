@@ -50,19 +50,11 @@
                         <P>I love travelling and have been to many places.</p>
                         <p><a href="https://linkedin.com/in/wenyiguo~/">Connect me on LinkedIn</a></br>
                         <a href="https://github.com/wenyi-guo">Check out my github</a></p>
+                        <br><br>
                     </div>
+                    <br><br>
                 </div>
 
-                <div class="row align-middle">
-                     <form action="/post-comment" method="POST">
-                        <p>Enter Your Comment Here</p>
-                        <label>User Name: </label><input type="text" name="user-name"><br/>
-                        <label>Email Address: </label><input type="text" name="email"><br/>
-                        <label>Comment: </label><textarea type="text" name="content"></textarea>
-                        <br/><br/>
-                        <input type="submit"/>
-                    </form>
-                </div>
 
                 <div class="row">
                     <h3>Comments</h3><br>
@@ -73,12 +65,35 @@
                     <form action="/get-comments" method="POST">
                         <label for="num"> Number of comments to display (between 5 and 10):</label>
                         <input type="number" id="num" name="num" min="5" max="10">
-                        <input type="submit">
+                        <input type="submit"><br>
                     </form>
+                </div>
+
+                <div class="row">
+                    <div class="pagination">
+                        <a href="#">&laquo;</a>
+                        <a class="active" href="#">1</a>
+                        <a href="#">2</a>
+                        <a href="#">3</a>
+                        <a href="#">4</a>
+                        <a href="#">5</a>
+                        <a href="#">&raquo;</a>
+                    </div>
                 </div>
                 
                 <div class="row">
                     <div id="comments-container"><p></P></div>
+                </div>
+
+                 <div class="row align-middle">
+                     <form action="/post-comment" method="POST">
+                        <h4>Enter Your Comment Here</h4>
+                        <label>User Name: </label><input type="text" name="user-name"><br/>
+                        <label>Email Address: </label><input type="text" name="email"><br/>
+                        <label>Comment: </label><textarea type="text" name="content"></textarea>
+                        <br/><br/>
+                        <input type="submit"/>
+                    </form>
                 </div>
             </div>
 

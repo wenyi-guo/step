@@ -34,7 +34,8 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/get-comments")
 public class ListCommentsServlet extends HttpServlet {  
   int num = 5;
-
+  int page = 1;
+  
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {    
     String numString = request.getParameter("num");
