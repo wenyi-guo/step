@@ -44,5 +44,4 @@ public class NewCommentServlet extends HttpServlet {
 
     response.sendRedirect("/index.html");
   }
-
 }
