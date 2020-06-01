@@ -14,6 +14,22 @@
 
 
 var number = 5;
+var order = "descending";
+
+const myorders = document.getElementById("orders");
+myorders.addEventListener("change", function(){
+  var e = document.getElementById("orders");
+  var selectedOrder = e.options[e.selectedIndex].value;
+  if (selectedOrder === "descending") {
+    order = "descending";
+  }
+  else{
+    order = "ascending";
+  }
+  getData(number);
+});
+
+
 /**
  * Add collapse content to the collapsible buttons
  */
@@ -32,13 +48,12 @@ for (i = 0; i < collapse.length; i++) {
   });
 }
 
-/**
- * Set the number of comments to view
- */
+/** Set the number of comments to view. */
 function setNum(num){
     number = num.value;
     getData(number);
 }
+
 /**
  * Fetch the data from server then add it to the page.
  */
@@ -51,7 +66,7 @@ function getData(num) {
         pageString = page.innerHTML;
     }
   }
-  fetch('/get-comments?num=' + num + '&page=' + pageString).then(response => response.json()).then((comments) =>  {
+  fetch('/get-comments?num=' + num + '&page=' + pageString + '&order=' + order).then(response => response.json()).then((comments) =>  {
     console.log(comments);
     const commentListElement = document.getElementById('comments-container');
     commentListElement.innerHTML="";

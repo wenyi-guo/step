@@ -35,7 +35,7 @@
                     <h2>About</h2>
                 </div>
 
-                <div class="row">
+                <div class="row mb-4">
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 align-middle">
                         <img class="img-fluid img-thumbnail rounded" height=512, width=341.25, src="images/DSC04294.jpg"/>
                     </div>
@@ -63,12 +63,16 @@
                 </div>
 
                 <div class="row">
-                    <!-- <form action="/get-comments" method="POST"> -->
-                        <label for="num"> Number of comments to display (between 5 and 10):</label>
-                        <input type="number" id="num" name="num" min="5" max="10" onchange="setNum(this)">
-                        
-                        <!-- <input type="submit"><br>
-                    </form> -->
+                    <label for="num"> Number of comments to display (between 5 and 10):</label>
+                    <input type="number" id="num" name="num" min="5" max="10" onchange="setNum(this)">
+                </div>
+
+                <div class="row">
+                    <label> Ordered by: </label>
+                     <select id="orders">
+                        <option value="descending">Descending Time</option>
+                        <option value="ascending">Ascending Time</option>
+                    </select>
                 </div>
 
                <div class="row">
@@ -87,7 +91,7 @@
                     <div id="comments-container"><p></P></div>
                 </div>
 
-                 <div class="row align-middle">
+                 <div class="row align-middle mb-4">
                      <form action="/post-comment" method="POST">
                         <br>
                         <h4>Enter Your Comment Here</h4>
