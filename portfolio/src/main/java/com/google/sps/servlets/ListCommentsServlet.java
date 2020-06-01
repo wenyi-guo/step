@@ -33,24 +33,35 @@ import javax.servlet.http.HttpServletResponse;
 /** Servlet responsible for listing comments. */
 @WebServlet("/get-comments")
 public class ListCommentsServlet extends HttpServlet {  
+  int page = 5;
   int num = 5;
-
+  
   @Override
-  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {    
+  public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     String numString = request.getParameter("num");
-    // Convert the input to an int.
+    String pageString = request.getParameter("page");
+    String order = request.getParameter("order");
     try {
       num = Integer.parseInt(numString);
     } catch (NumberFormatException e) {
       System.err.println("Could not convert to int: " + numString);
       num = 5;
     }
-    response.sendRedirect("/index.html");
-  }
+    try {
+      page = Integer.parseInt(pageString);
+    } catch (NumberFormatException e) {
+      System.err.println("Could not convert to int: " + pageString);
+      page = 1;
+    }
 
-  public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    Query query = new Query("Comment");
-
+    Query query;
+    if(order.equals("descending")){
+        query = new Query("Comment").addSort("timestamp", SortDirection.DESCENDING);
+    }
+    else{
+        query = new Query("Comment").addSort("timestamp", SortDirection.ASCENDING);
+    }
+    
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
 
@@ -60,12 +71,20 @@ public class ListCommentsServlet extends HttpServlet {
       String userName = (String) entity.getProperty("userName");
       String email = (String) entity.getProperty("email");
       String content = (String) entity.getProperty("content");
+      long timestamp = (long) entity.getProperty("timestamp");
 
-      Comment comment = new Comment(userName, email, content);
+      Comment comment = new Comment(userName, email, content, timestamp);
       comments.add(comment);
     }
-    if(comments.size() > num){
-        comments = comments.subList(0, num);
+
+    if(comments.size() >= page*num){
+        comments = comments.subList((page-1)*num, page*num);
+    }
+    else if(comments.size() >= (page-1)*num){
+        comments = comments.subList((page-1)*num, comments.size());
+    }
+    else{
+        comments.clear();
     }
 
     Gson gson = new Gson();
@@ -73,6 +92,4 @@ public class ListCommentsServlet extends HttpServlet {
     response.setContentType("application/json;");
     response.getWriter().println(gson.toJson(comments));
   }
-
-
 }

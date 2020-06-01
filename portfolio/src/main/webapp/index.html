@@ -9,7 +9,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css">
   </head>
-  <body onload="getData()">
+  <body onload="start()">
         <h1 class="center">My Portfolio</h1>
         <!-- Create the tab-bar at the top -->
         <div class="container-fluid"> 
@@ -35,7 +35,7 @@
                     <h2>About</h2>
                 </div>
 
-                <div class="row">
+                <div class="row mb-4">
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 align-middle">
                         <img class="img-fluid img-thumbnail rounded" height=512, width=341.25, src="images/DSC04294.jpg"/>
                     </div>
@@ -50,35 +50,57 @@
                         <P>I love travelling and have been to many places.</p>
                         <p><a href="https://linkedin.com/in/wenyiguo~/">Connect me on LinkedIn</a></br>
                         <a href="https://github.com/wenyi-guo">Check out my github</a></p>
+                        <br><br>
                     </div>
+                    <br><br>
                 </div>
 
-                <div class="row align-middle">
+
+                <div class="row">
+                    <br><br>
+                    <h3>Comments</h3><br>
+                    <input class="button btn-primary" type="button" value="Clear Comments" onclick="deleteData()">
+                </div>
+
+                <div class="row">
+                    <label for="num"> Number of comments to display (between 5 and 10):</label>
+                    <input type="number" id="num" name="num" min="5" max="10" onchange="setNum(this)">
+                </div>
+
+                <div class="row">
+                    <label> Ordered by: </label>
+                     <select id="orders">
+                        <option value="descending">Descending Time</option>
+                        <option value="ascending">Ascending Time</option>
+                    </select>
+                </div>
+
+               <div class="row">
+                    <div class="pagination">
+                        <button class="pagebtn" id="prev" onclick="prev()">&laquo;</button>
+                        <button class="pagebtn active">1</button>
+                        <button class="pagebtn">2</button>
+                        <button class="pagebtn">3</button>
+                        <button class="pagebtn">4</button>
+                        <button class="pagebtn">5</button>
+                        <button class="pagebtn" id="next" onclick="next()">&raquo;</button>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div id="comments-container"><p></P></div>
+                </div>
+
+                 <div class="row align-middle mb-4">
                      <form action="/post-comment" method="POST">
-                        <p>Enter Your Comment Here</p>
+                        <br>
+                        <h4>Enter Your Comment Here</h4>
                         <label>User Name: </label><input type="text" name="user-name"><br/>
                         <label>Email Address: </label><input type="text" name="email"><br/>
                         <label>Comment: </label><textarea type="text" name="content"></textarea>
                         <br/><br/>
                         <input type="submit"/>
                     </form>
-                </div>
-
-                <div class="row">
-                    <h3>Comments</h3><br>
-                    <input class="button btn-primary" type="button" value="Clear Comments" onclick="deleteData()">
-                </div>
-
-                <div class="row">
-                    <form action="/get-comments" method="POST">
-                        <label for="num"> Number of comments to display (between 5 and 10):</label>
-                        <input type="number" id="num" name="num" min="5" max="10">
-                        <input type="submit">
-                    </form>
-                </div>
-                
-                <div class="row">
-                    <div id="comments-container"><p></P></div>
                 </div>
             </div>
 

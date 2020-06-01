@@ -33,11 +33,13 @@ public class NewCommentServlet extends HttpServlet {
     String userName = request.getParameter("user-name");
     String email = request.getParameter("email");
     String content = request.getParameter("content");
+    long timestamp = System.currentTimeMillis();
 
     Entity comment = new Entity("Comment");
     comment.setProperty("userName", userName);
     comment.setProperty("email", email);
     comment.setProperty("content", content);
+    comment.setProperty("timestamp", timestamp);
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.put(comment);
