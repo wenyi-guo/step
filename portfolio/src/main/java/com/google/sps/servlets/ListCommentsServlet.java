@@ -33,23 +33,18 @@ import javax.servlet.http.HttpServletResponse;
 /** Servlet responsible for listing comments. */
 @WebServlet("/get-comments")
 public class ListCommentsServlet extends HttpServlet {  
-  int num = 5;
   int page = 1;
-  
+  int num = 5;
   @Override
-  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {    
+  public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     String numString = request.getParameter("num");
-    // Convert the input to an int.
     try {
       num = Integer.parseInt(numString);
     } catch (NumberFormatException e) {
       System.err.println("Could not convert to int: " + numString);
       num = 5;
     }
-    response.sendRedirect("/index.html");
-  }
 
-  public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     Query query = new Query("Comment");
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
@@ -74,6 +69,4 @@ public class ListCommentsServlet extends HttpServlet {
     response.setContentType("application/json;");
     response.getWriter().println(gson.toJson(comments));
   }
-
-
 }

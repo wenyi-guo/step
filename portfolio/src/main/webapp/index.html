@@ -9,7 +9,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css">
   </head>
-  <body onload="getData()">
+  <body onload="getData(5)">
         <h1 class="center">My Portfolio</h1>
         <!-- Create the tab-bar at the top -->
         <div class="container-fluid"> 
@@ -62,14 +62,15 @@
                 </div>
 
                 <div class="row">
-                    <form action="/get-comments" method="POST">
+                    <!-- <form action="/get-comments" method="POST"> -->
                         <label for="num"> Number of comments to display (between 5 and 10):</label>
-                        <input type="number" id="num" name="num" min="5" max="10">
-                        <input type="submit"><br>
-                    </form>
+                        <input type="number" id="num" name="num" min="5" max="10" onchange="setNum(this)">
+                        
+                        <!-- <input type="submit"><br>
+                    </form> -->
                 </div>
 
-                <div class="row">
+               <div class="row">
                     <div class="pagination">
                         <a href="#">&laquo;</a>
                         <a class="active" href="#">1</a>

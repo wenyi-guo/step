@@ -30,13 +30,17 @@ for (i = 0; i < collapse.length; i++) {
   });
 }
 
+function setNum(num){
+    getData(num.value);
+}
 /**
  * Fetch the data from server then add it to the page.
  */
- function getData() {
-  fetch('/get-comments').then(response => response.json()).then((comments) =>  {
+ function getData(num) {
+  fetch('/get-comments?num=' + num).then(response => response.json()).then((comments) =>  {
     console.log(comments);
     const commentListElement = document.getElementById('comments-container');
+    commentListElement.innerHTML="";
     if(comments.length === 0){
         commentListElement.innerText="No comment yet.";   
     } else{
@@ -51,7 +55,7 @@ for (i = 0; i < collapse.length; i++) {
 function createListElement(text) {
   const liElement = document.createElement('div');
   liElement.classList.add('row');
-  liElement.innerText = "User Name: " + text.userName + "   Email: " + text.email + "\n" + "Comment: " + text.content + "<br>";
+  liElement.innerText = "User Name: " + text.userName + "   Email: " + text.email + "\n" + "Comment: " + text.content + "\n";
  
   return liElement;
 }
