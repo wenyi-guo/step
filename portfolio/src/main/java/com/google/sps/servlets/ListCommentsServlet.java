@@ -33,19 +33,26 @@ import javax.servlet.http.HttpServletResponse;
 /** Servlet responsible for listing comments. */
 @WebServlet("/get-comments")
 public class ListCommentsServlet extends HttpServlet {  
-  int page = 1;
+  int page = 5;
   int num = 5;
   @Override
   public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
     String numString = request.getParameter("num");
+    String pageString = request.getParameter("page");
     try {
       num = Integer.parseInt(numString);
     } catch (NumberFormatException e) {
       System.err.println("Could not convert to int: " + numString);
       num = 5;
     }
+    try {
+      page = Integer.parseInt(pageString);
+    } catch (NumberFormatException e) {
+      System.err.println("Could not convert to int: " + pageString);
+      page = 1;
+    }
 
-    Query query = new Query("Comment");
+    Query query = new Query("Comment").addSort("timestamp", SortDirection.DESCENDING);
 
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);
@@ -56,12 +63,20 @@ public class ListCommentsServlet extends HttpServlet {
       String userName = (String) entity.getProperty("userName");
       String email = (String) entity.getProperty("email");
       String content = (String) entity.getProperty("content");
+      long timestamp = (long) entity.getProperty("timestamp");
 
-      Comment comment = new Comment(userName, email, content);
+      Comment comment = new Comment(userName, email, content, timestamp);
       comments.add(comment);
     }
-    if(comments.size() > num){
-        comments = comments.subList(0, num);
+
+    if(comments.size() >= page*num){
+        comments = comments.subList((page-1)*num, page*num);
+    }
+    else if(comments.size() >= (page-1)*num){
+        comments = comments.subList((page-1)*num, comments.size());
+    }
+    else{
+        comments.clear();
     }
 
     Gson gson = new Gson();

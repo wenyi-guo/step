@@ -55,21 +55,24 @@
   display: inline-block;
 }
 
-.pagination a {
-  color: black;
-  float: left;
+.pagebtn {
+  border: none;
+  outline: none;
   padding: 8px 16px;
+  background-color: #f1f1f1;
+  cursor: pointer;
+  font-size: 18px;
   text-decoration: none;
   border-radius: 5px;
 }
 
-.pagination a.active {
+.pagebtn.active {
   background-color: #66ccff;
   color: white;
   border-radius: 5px;
 }
 
-.pagination a:hover:not(.active) {background-color: #ddd;}
+.pagebtn:hover:not(.active) {background-color: #ddd;}
 
 
 

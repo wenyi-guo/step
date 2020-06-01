@@ -10,11 +10,13 @@ public class Comment{
     String userName;
     String email;
     String content;
+    long timestamp;
 
-    public Comment(String userName, String email, String content){
+    public Comment(String userName, String email, String content, long timestamp){
         this.userName = userName;
         this.email = email;
         this.content = content;
+        this.timestamp = timestamp;
     }
 
     public String getUserName(){

@@ -9,7 +9,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css">
   </head>
-  <body onload="getData(5)">
+  <body onload="start()">
         <h1 class="center">My Portfolio</h1>
         <!-- Create the tab-bar at the top -->
         <div class="container-fluid"> 
@@ -57,6 +57,7 @@
 
 
                 <div class="row">
+                    <br><br>
                     <h3>Comments</h3><br>
                     <input class="button btn-primary" type="button" value="Clear Comments" onclick="deleteData()">
                 </div>
@@ -72,13 +73,13 @@
 
                <div class="row">
                     <div class="pagination">
-                        <a href="#">&laquo;</a>
-                        <a class="active" href="#">1</a>
-                        <a href="#">2</a>
-                        <a href="#">3</a>
-                        <a href="#">4</a>
-                        <a href="#">5</a>
-                        <a href="#">&raquo;</a>
+                        <button class="pagebtn" id="prev" onclick="prev()">&laquo;</button>
+                        <button class="pagebtn active">1</button>
+                        <button class="pagebtn">2</button>
+                        <button class="pagebtn">3</button>
+                        <button class="pagebtn">4</button>
+                        <button class="pagebtn">5</button>
+                        <button class="pagebtn" id="next" onclick="next()">&raquo;</button>
                     </div>
                 </div>
                 
@@ -88,6 +89,7 @@
 
                  <div class="row align-middle">
                      <form action="/post-comment" method="POST">
+                        <br>
                         <h4>Enter Your Comment Here</h4>
                         <label>User Name: </label><input type="text" name="user-name"><br/>
                         <label>Email Address: </label><input type="text" name="email"><br/>

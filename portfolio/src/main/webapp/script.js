@@ -12,6 +12,8 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+
+var number = 5;
 /**
  * Add collapse content to the collapsible buttons
  */
@@ -30,19 +32,31 @@ for (i = 0; i < collapse.length; i++) {
   });
 }
 
+/**
+ * Set the number of comments to view
+ */
 function setNum(num){
-    getData(num.value);
+    number = num.value;
+    getData(number);
 }
 /**
  * Fetch the data from server then add it to the page.
  */
- function getData(num) {
-  fetch('/get-comments?num=' + num).then(response => response.json()).then((comments) =>  {
+function getData(num) {
+  // Get the page number selected by pagination
+  var pageString;
+  for (i = 0; i < pagination.length; i++) {
+    var page = pagination[i];
+    if(page.classList.contains('active')){
+        pageString = page.innerHTML;
+    }
+  }
+  fetch('/get-comments?num=' + num + '&page=' + pageString).then(response => response.json()).then((comments) =>  {
     console.log(comments);
     const commentListElement = document.getElementById('comments-container');
     commentListElement.innerHTML="";
     if(comments.length === 0){
-        commentListElement.innerText="No comment yet.";   
+        commentListElement.innerText="No comment on this page.";   
     } else{
         comments.forEach((comment) => {
         commentListElement.appendChild(createListElement(comment));
@@ -55,9 +69,18 @@ function setNum(num){
 function createListElement(text) {
   const liElement = document.createElement('div');
   liElement.classList.add('row');
-  liElement.innerText = "User Name: " + text.userName + "   Email: " + text.email + "\n" + "Comment: " + text.content + "\n";
+  liElement.innerText = "\nUser Name: " + text.userName + "   Email: " + text.email + "\nTime: " + text.timestamp + "\n" + "Comment: " + text.content + "\n";
  
   return liElement;
+}
+
+/** Create a new page button. */
+function createPageElement(newnum){
+    const element = document.createElement('button');
+    element.classList.add('pagebtn');
+    element.innerText = newnum;
+
+    return element;
 }
 
 function deleteData(){
@@ -65,7 +88,7 @@ fetch("delete-comments", {method: 'POST'})
   .then(response => {
     if (response.status === 200) {
       console.log("success");
-      getData();
+      getData(5);
       return response.json();
     } else {
       console.log("fail");
@@ -73,4 +96,78 @@ fetch("delete-comments", {method: 'POST'})
     }
   });
 }
+
+var pageClass = document.getElementsByClassName("pagination")[0];
+var pagination = document.getElementsByClassName("pagination")[0].children;
+
+// handle prev 
+function prev(){
+    if(pagination[1].innerText === '1'){
+        return;
+    }
+    var current = document.querySelector(".pagebtn.active");
+    current.classList.remove('active');
+    if(current === pagination[1]){
+        const first = parseInt(pagination[1].innerText) - 1;   
+        pageClass.removeChild(pagination[5]);
+        pageClass.insertBefore(createPageElement(first.toString()), pageClass.children[1]);
+        document.getElementsByClassName("pagination")[0].children[1].classList.add("active");
+    }
+    var prevElement = current.previousElementSibling;
+    prevElement.classList.add("active");
+    const first = parseInt(pagination[1].innerText) - 1;   
+    if(first <= 0){
+        return;
+    }
+    pageClass.removeChild(pagination[5]);
+    pageClass.insertBefore(createPageElement(first.toString()), pageClass.children[1]);
+    // refresh the pagination variables
+    pageClass = document.getElementsByClassName("pagination")[0];
+    pagination = document.getElementsByClassName("pagination")[0].children;
+    changePage();
+    getData(number);
+}
+
+// handle next
+function next(){
+    var current = document.querySelector(".pagebtn.active");
+    current.classList.remove('active');
+    if(current === pagination[5]){
+        const last = parseInt(pagination[5].innerText) + 1;   
+        pageClass.removeChild(pagination[1]);
+        pageClass.insertBefore(createPageElement(last.toString()), pageClass.children[5]);
+        document.getElementsByClassName("pagination")[0].children[5].classList.add("active");
+    }
+    var nextElement = current.nextElementSibling;
+    nextElement.classList.add("active");
+    const last = parseInt(pagination[5].innerText) + 1;   
+    pageClass.removeChild(pagination[1]);
+    pageClass.insertBefore(createPageElement(last.toString()), pageClass.children[5]);
+    // refresh the pagination variables
+    pageClass = document.getElementsByClassName("pagination")[0];
+    pagination = document.getElementsByClassName("pagination")[0].children;
+    changePage();
+    getData(number);
+}
+
+// Change the active page
+function changePage(){
+    for (i = 1; i < pagination.length-1; i++) {
+    var page = pagination[i];
+    page.addEventListener("click", function() {
+        var current = document.querySelector(".pagebtn.active");
+        current.classList.remove('active');
+        this.classList.add('active');
+        getData(number);
+    });
+    }
+}
+
+function start(){
+    getData(5);
+    changePage();
+}
+
+
+
 
