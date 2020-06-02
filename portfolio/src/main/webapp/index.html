@@ -8,6 +8,7 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="style.css">
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
   </head>
   <body onload="start()">
         <h1 class="center">My Portfolio</h1>
@@ -31,11 +32,11 @@
 
             <!-- The tab for about me information -->
             <div class="container-fluid tab-pane fade show active" role="tabpanel" aria-labelledby="tab-about" id="about"> 
-                <div class="row">
+                <div class="row my-2">
                     <h2>About</h2>
                 </div>
 
-                <div class="row mb-4">
+                <div class="row my-2">
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 align-middle">
                         <img class="img-fluid img-thumbnail rounded" height=512, width=341.25, src="images/DSC04294.jpg"/>
                     </div>
@@ -56,7 +57,7 @@
                 </div>
 
 
-                <div class="row">
+                <div class="row mt-5">
                     <br><br>
                     <h3>Comments</h3><br>
                     <input class="button btn-primary" type="button" value="Clear Comments" onclick="deleteData()">
@@ -101,6 +102,13 @@
                         <br/><br/>
                         <input type="submit"/>
                     </form>
+                </div>
+
+                <div class="row mt-2">
+                    <figure class="figure">
+                        <div id="barchart" c;ass="rounded"></div>
+                        <figcaption class="figure-caption text-middle">A bar chart of number of comments by user names.</figcaption>
+                    </figure>
                 </div>
             </div>
 
