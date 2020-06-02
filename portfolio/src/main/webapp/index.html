@@ -32,11 +32,11 @@
 
             <!-- The tab for about me information -->
             <div class="container-fluid tab-pane fade show active" role="tabpanel" aria-labelledby="tab-about" id="about"> 
-                <div class="row my-2">
+                <div class="row my-2 justify-content-md-start">
                     <h2>About</h2>
                 </div>
 
-                <div class="row my-2">
+                <div class="row my-2 justify-content-md-center">
                     <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 align-middle">
                         <img class="img-fluid img-thumbnail rounded" height=512, width=341.25, src="images/DSC04294.jpg"/>
                     </div>
@@ -56,19 +56,22 @@
                     <br><br>
                 </div>
 
+                <div class="row my-3 justify-content-md-center">
+                    <img class="img-fluid center", src="images/divider.png"/>
+                </div>
 
-                <div class="row mt-5">
+                <div class="row mt-5 my-1 justify-content-md-center">
                     <br><br>
                     <h3>Comments</h3><br>
                     <input class="button btn-primary" type="button" value="Clear Comments" onclick="deleteData()">
                 </div>
 
-                <div class="row">
+                <div class="row my-1 justify-content-end">
                     <label for="num"> Number of comments to display (between 5 and 10):</label>
                     <input type="number" id="num" name="num" min="5" max="10" onchange="setNum(this)">
                 </div>
 
-                <div class="row">
+                <div class="row my-1 justify-content-end">
                     <label> Ordered by: </label>
                      <select id="orders">
                         <option value="descending">Descending Time</option>
@@ -76,7 +79,7 @@
                     </select>
                 </div>
 
-               <div class="row">
+               <div class="row my-1 justify-content-end">
                     <div class="pagination">
                         <button class="pagebtn" id="prev" onclick="prev()">&laquo;</button>
                         <button class="pagebtn active">1</button>
@@ -88,11 +91,15 @@
                     </div>
                 </div>
                 
-                <div class="row">
+                <div class="row my-1 justify-content-md-center">
                     <div id="comments-container"><p></P></div>
                 </div>
 
-                 <div class="row align-middle mb-4">
+                <div class="row my-3 justify-content-md-center">
+                    <img class="img-fluid center", src="images/divider.png"/>
+                </div>
+
+                 <div class="row justify-content-md-center mb-4 my-1">
                      <form action="/post-comment" method="POST">
                         <br>
                         <h4>Enter Your Comment Here</h4>
@@ -104,9 +111,13 @@
                     </form>
                 </div>
 
-                <div class="row mt-2">
+                <div class="row my-3 justify-content-md-center">
+                    <img class="img-fluid center", src="images/divider.png"/>
+                </div>
+
+                <div class="row mt-2 justify-content-md-center">
                     <figure class="figure">
-                        <div id="barchart" class="rounded"></div>
+                        <div id="barchart" style="border: 1px solid #ccc" class="rounded"></div>
                         <figcaption class="figure-caption text-middle">A bar chart of number of comments by user names.</figcaption>
                     </figure>
                 </div>
@@ -115,12 +126,12 @@
   
             <!-- The tab for the projects I did -->
             <div class="container-fluid tab-pane fade" role="tabpanel" aria-labelledby="tab-projects" id="projects"> 
-                <div class="row">
+                <div class="row justify-content-md-start">
                     <h2>Projects</h2>
                 </div>
 
                 <!-- Add the projects with collapible description. -->
-                <div class="row">
+                <div class="row justify-content-md-center">
                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 center-block text-center">  
                         <div class="collapsible btn border border-info"><h3>Minibot Blockly Data Analytics</h3></div>
                         <div class="collapse-content">
@@ -169,11 +180,11 @@
             <!-- The tab for image gallery -->
             <div class="container-fluid tab-pane fade" role="tabpanel" aria-labelledby="tab-gallery" id="gallery"> 
                 <div class="container-fluid"> 
-                    <div class="row">
-                        <p>The gallery contains photos I took and photos of me.</p>
+                    <div class="row my-2 justify-content-md-center">
+                        <h4>The gallery contains photos I took and photos of me.</h4>
                     </div>
                     
-                    <div class="row">
+                    <div class="row justify-content-md-center">
                         <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 center-block text-center align-middle">  
                             <img class="img-fluid img-thumbnail rounded" src="images/IMG_2002.jpg"/>
                         </div>
@@ -185,7 +196,7 @@
                         </div>
                     </div>
 
-                    <div class="row">
+                    <div class="row justify-content-md-center">
                         <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 center-block text-center align-middle"> 
                             <img class="img-fluid img-thumbnail rounded" src="images/DSC03870.jpg"/>
                             
@@ -198,7 +209,7 @@
                         </div>
                     </div>
 
-                    <div class="row">
+                    <div class="row justify-content-md-center">
                         <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 center-block text-center align-middle"> 
                             <img class="img-fluid img-thumbnail rounded" src="images/IMG_1969.jpg"/>
                         </div>
@@ -209,6 +220,17 @@
                             <img class="img-fluid img-thumbnail rounded" src="images/IMG_1243.jpg"/>
                         </div>
                     </div>
+
+                    <div class="row mt-5 my-2 justify-content-md-center">
+                        <h4>Places I have been to.</h4>
+                    </div>
+                    <div class="row my-2 justify-content-md-center">
+                        <figure class="figure">
+                            <div style="border: 1px solid #ccc" class="rounded"><div id="geochart"></div></div>
+                            <figcaption class="figure-caption text-middle">A geo chart showing the places I've been to.</figcaption>
+                        </figure>
+                    </div>
+                     
                 </div>
             </div>
         </div>

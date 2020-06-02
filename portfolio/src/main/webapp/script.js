@@ -183,14 +183,14 @@ function start(){
 }
 
 /** Google Chart API. */
-// google.charts.load('current', {'packages':["bar"]});
-// google.charts.setOnLoadCallback(drawBarChart);
-google.charts.load('current', {
-  callback: drawBarChart,
-  packages: ['corechart']
-});
+ google.charts.load('current', {
+        'packages':['corechart', 'geochart'],
+        'mapsApiKey': 'AIzaSyB9U6xT4W3gkESOvA8Sn_kU_aCPZjTh1f4'
+      });
+google.charts.setOnLoadCallback(drawCharts);
 
-function drawBarChart() {
+
+function drawCharts() {
   fetch('/get-all-comments').then(response => response.json())
   .then((comments) => {
     const data = new google.visualization.DataTable();
@@ -232,6 +232,24 @@ function drawBarChart() {
 
     var chart = new google.visualization.BarChart(document.getElementById("barchart"));
     chart.draw(view, options);
+    
+    // geo chart
+    var data2 = google.visualization.arrayToDataTable([
+        ['Country', 'Been to'],
+        ['United States', 1],
+        ['China', 1],
+        ['Japan', 1],
+        ['Canada', 1],
+        ['France', 1],
+        ['Italy', 1],
+        ['United Kingdom', 1],
+        ['Australia', 1],
+    ]);
+
+    var options2 = {};
+
+    var chart2 = new google.visualization.GeoChart(document.getElementById('geochart'));
+    chart2.draw(data2, options2);
   });
 }
 
