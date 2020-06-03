@@ -12,6 +12,12 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+/** The functions called onload */
+function start(){
+    getData(5);
+    changePage();
+    isLoggedIn();
+}
 
 var number = 5; // default max number of comments in one page
 var order = "descending"; // default order
@@ -176,12 +182,6 @@ function changePage(){
     }
 }
 
-/** The functions called onload */
-function start(){
-    getData(5);
-    changePage();
-}
-
 /** Google Chart API. */
  google.charts.load('current', {
         'packages':['corechart', 'geochart'],
@@ -253,6 +253,38 @@ function drawCharts() {
   });
 }
 
+/** Get the login status. If logged in: display post comment box and logout button. If not logged in: display login button and hide post comment box. */
+function isLoggedIn(){
+    fetch('/auth', {headers : { 
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            }
+        }).then(response => response.json()).then((loginstatus) =>  {
+        console.log(loginstatus);
+        if(loginstatus.loginStatus === true){
+            console.log("logintrue");
+            var commentElement = document.getElementById('post-comment-container');
+            commentElement.style.visibility = "visible";
+            var loginElement = document.getElementById('login-container');
+            loginElement.style.visibility = "hidden";
+            var logoutElement = document.getElementById('logout-container');
+            logoutElement.style.visibility = "visible";
+            var logoutURL = document.getElementById('logoutURL');
+            logoutURL.href = loginstatus.URL;
+        }
+        else{
+            console.log("loginfalse");
+            var commentElement = document.getElementById('post-comment-container');
+            commentElement.style.visibility = "hidden";
+            var loginElement = document.getElementById('login-container');
+            loginElement.style.visibility = "visible";
+            var logoutElement = document.getElementById('logout-container');
+            logoutElement.style.visibility = "hidden";
+            var loginURL = document.getElementById('loginURL');
+            loginURL.href = loginstatus.URL;
+        }
+    });
 
+}
 
 
