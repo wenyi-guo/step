@@ -21,7 +21,10 @@ public class DeleteCommentByIdServlet extends HttpServlet {
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     String idString = request.getParameter("id");
+    System.out.println("java");
+    System.out.println(idString);
     long id = Long.parseLong(idString);
+
     Query query = new Query("Comment");
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     PreparedQuery results = datastore.prepare(query);

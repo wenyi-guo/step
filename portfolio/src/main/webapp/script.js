@@ -88,15 +88,21 @@ function createListElement(text) {
   const liElement = document.createElement('div');
   liElement.classList.add('row');
   liElement.classList.add('card');
+  var cardTitle = document.createElement('div');
+  cardTitle.className = 'card-title';
+  cardTitle.innerText = "User: " + text.userName;
   var cardBody = document.createElement('div');
   cardBody.className = 'card-body';
-  var date = new Date(text.timestamp * 1000);
-  cardBody.innerText = "\nUser Name: " + text.userName + "   Email: " + text.email + "\nTime: " + date.toLocaleString(); + "\n" + "Comment: " + text.content + "\n";
+  var contentElement = document.createElement('div');
+  contentElement.classList.add('row');
+  var date = new Date(text.timestamp);
+  contentElement.innerText = "Email: " + text.email + "\nTime: " + date.toLocaleString() + "\n" + "Comment: " + text.content + "\n";
   var deleteBtn = document.createElement("BUTTON");   // Create a <button> element
+  deleteBtn.classList.add('row');
   deleteBtn.classList.add('close-button');
-  deleteBtn.innerHTML = "delete";     
+  deleteBtn.innerHTML = "delete";   
   deleteBtn.onclick = function() { 
-      fetch("/delete-id?id" + text.id, {method: 'POST'})
+      fetch("/delete-id?id=" + text.id, {method: 'POST'})
         .then(response => {
             if (response.status === 200) {
             console.log("delete one comment");
@@ -108,6 +114,8 @@ function createListElement(text) {
             }
         });
     }
+  cardBody.appendChild(cardTitle);
+  cardBody.appendChild(contentElement);
   cardBody.appendChild(deleteBtn);
   liElement.appendChild(cardBody);
   return liElement;
