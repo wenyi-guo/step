@@ -24,14 +24,18 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import com.google.appengine.api.users.User;
+import com.google.appengine.api.users.UserService;
+import com.google.appengine.api.users.UserServiceFactory;
 
 /** Servlet responsible for creating new comments. */
 @WebServlet("/post-comment")
 public class NewCommentServlet extends HttpServlet {
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    UserService userService = UserServiceFactory.getUserService();
     String userName = request.getParameter("user-name");
-    String email = request.getParameter("email");
+    String email = userService.getCurrentUser().getEmail();
     String content = request.getParameter("content");
     long timestamp = System.currentTimeMillis();
 

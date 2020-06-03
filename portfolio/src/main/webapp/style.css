@@ -48,6 +48,7 @@
     border-radius: 5px;
     border: none;
     margin: 0px 20px; 
+    padding: 5px 5px;
 }
 
 /* Style the pagination buttons. */
@@ -74,6 +75,12 @@
 
 .pagebtn:hover:not(.active) {background-color: #ddd;}
 
+#post-comment-container {
+    visibility: hidden;
+}
 
+#logout-container {
+    visibility: hidden;
+}
 
 
