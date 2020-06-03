@@ -51,6 +51,14 @@
     padding: 5px 5px;
 }
 
+.close-button {
+    background-color: red;
+    border-radius: 5px;
+    border: none;
+    margin: 0px 10px; 
+    padding: 5px 5px;
+}
+
 /* Style the pagination buttons. */
 .pagination {
   display: inline-block;
