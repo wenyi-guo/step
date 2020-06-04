@@ -83,6 +83,12 @@
 
 .pagebtn:hover:not(.active) {background-color: #ddd;}
 
+.card {
+    margin: 2px 4px;
+    padding: 8px 16px;
+    border-radius: 5px;
+}
+
 #post-comment-container {
     visibility: hidden;
 }
@@ -91,4 +97,6 @@
     visibility: hidden;
 }
 
-
+#login-container {
+    visibility: hidden;
+}
