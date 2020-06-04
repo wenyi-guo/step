@@ -254,8 +254,8 @@ function drawCharts() {
 
     var options = {
           title: 'Comments Bar Chart',
-          width: 900,
-          height: 500,
+          width: 600,
+          height: 320,
           legend: { position: 'none' },
           chart: { title: 'Number of Comments by User Name',},
           bars: 'horizontal', // Required for Material Bar Charts.
@@ -292,7 +292,10 @@ function drawCharts() {
         ['Australia', 1],
     ]);
 
-    var options2 = {};
+    var options2 = {
+         width: 500,
+        height: 300,
+    };
 
     var chart2 = new google.visualization.GeoChart(document.getElementById('geochart'));
     chart2.draw(data2, options2);
