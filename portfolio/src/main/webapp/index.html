@@ -12,9 +12,9 @@
     <meta charset="utf-8">
   </head>
   <body onload="start()">
-        <h1 class="center">My Portfolio</h1>
+        <div class="portfolio-font">My Portfolio</div>
         <!-- Create the tab-bar at the top -->
-        <div class="container-fluid"> 
+        <div class="container-fluid navbar navbar-light fixed-top"> 
             <ul class="nav nav-tabs" id="myTab" role="tablist" aria-label="tabs">
                 <li class="nav-item">
                     <a class="nav-link active" id="tab-about" data-toggle="tab" href="#about" role="tab" aria-controls="about" aria-selected="true">About</a>
@@ -25,6 +25,9 @@
                 <li class="nav-item">
                     <a class="nav-link" id="tab-gallery" data-toggle="tab" href="#gallery" role="tab" aria-controls="gallery" aria-selected="false">Gallery</a>
                 </li>
+                <li class="nav-item">
+                    <a class="nav-link" id="tab-comment" data-toggle="tab" href="#comment" role="tab" aria-controls="comment" aria-selected="false">Comments</a>
+                </li>
             </ul>
         </div>
 
@@ -33,8 +36,12 @@
 
             <!-- The tab for about me information -->
             <div class="container-fluid tab-pane fade show active" role="tabpanel" aria-labelledby="tab-about" id="about"> 
-                <div class="row my-2 justify-content-md-start">
-                    <h2>About</h2>
+                <div class="row my-2 justify-content-md-center">
+                    <div class="tab-font">About</div>
+                </div>
+
+                <div class="row my-3 justify-content-md-center">
+                    <img class="img-fluid center", src="images/divider.png"/>
                 </div>
 
                 <div class="row my-2 justify-content-md-center">
@@ -42,7 +49,9 @@
                         <img class="img-fluid img-thumbnail rounded" height=512, width=341.25, src="images/DSC04294.jpg"/>
                     </div>
                     <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8 align-middle">
+                        <br><br>
                         <p>Hi, this is Wenyi Guo! </p>
+                        
                         <p>I'm an undergraduate stuent at Cornell University class of 2022. My majors are computer science and mathematics. 
                             I like programming as well as the theoratical knowledge.</p>
                         <p>I'm a developer, a programmer,a dancer, a photographer, and a learner. I hope to create a better world with new ideas;
@@ -50,6 +59,9 @@
                             I shot would be eternal.</p>
                         <p>I love cats but I don' have one. </p>
                         <P>I love travelling and have been to many places. You can check the places I've been to in the Gallery tab. </p>
+
+                        <br><br><br>
+
                         <p><a href="https://linkedin.com/in/wenyiguo~/">Connect me on LinkedIn</a></br>
                         <a href="https://github.com/wenyi-guo">Check out my github</a></p>
                         <br><br>
@@ -57,91 +69,22 @@
                     <br><br>
                 </div>
 
-                <div class="row my-3 justify-content-md-center">
-                    <img class="img-fluid center", src="images/divider.png"/>
-                </div>
-
-                <div class="row mt-5 my-1 justify-content-md-center">
-                    <h3>Comments</h3><br>
-                    <input class="button btn-primary" type="button" value="Clear Comments" onclick="deleteData()">
-                </div>
-
-                <div class="row my-1 justify-content-center">
-                    <label for="num"> Number of comments to display (between 5 and 10):</label>
-                    <input type="number" id="num" name="num" min="5" max="10" onchange="setNum(this)">
-                </div>
-
-                <div class="row my-1 justify-content-center">
-                    <label> Ordered by: </label>
-                     <select id="orders">
-                        <option value="descending">Descending Time</option>
-                        <option value="ascending">Ascending Time</option>
-                    </select>
-                </div>
-
-               <div class="row my-1 justify-content-center">
-                    <div class="pagination">
-                        <button class="pagebtn" id="prev" onclick="prev()">&laquo;</button>
-                        <button class="pagebtn active">1</button>
-                        <button class="pagebtn">2</button>
-                        <button class="pagebtn">3</button>
-                        <button class="pagebtn">4</button>
-                        <button class="pagebtn">5</button>
-                        <button class="pagebtn" id="next" onclick="next()">&raquo;</button>
-                    </div>
-                </div>
-                
-                 <div class="row my-1 justify-content-md-center">
-                    <div id="comments-container"><p></P></div>
-                </div>
-
-                <div class="row my-3 justify-content-md-center">
-                    <img class="img-fluid center", src="images/divider.png"/>
-                </div>
-                
-                 <div class="row my-1 justify-content-md-center">
-                    <div id="login-container">
-                        <p>Please login to post comments!</P>
-                        <a href="" id="loginURL"><button class="button btn-primary">Login</button></a>
-                    </div>
-                    <div id="logout-container">
-                        <a href="" id="logoutURL"><button class="button btn-primary">Logout</button></a>
-                    </div>
-                </div>
-
-                 <div class="row justify-content-md-center mb-4 my-1" id="post-comment-container">
-                     <form action="/post-comment" method="POST">
-                        <br>
-                        <h4>Enter Your Comment Here</h4>
-                        <label>User Name: </label><input type="text" name="user-name"><br/>
-                        <!-- <label>Email Address: </label><input type="text" name="email"><br/> -->
-                        <label>Comment: </label><textarea type="text" name="content"></textarea>
-                        <br/><br/>
-                        <input type="submit"/>
-                    </form>
-                </div>
-
-                <div class="row my-3 justify-content-md-center">
-                    <img class="img-fluid center", src="images/divider.png"/>
-                </div>
-
-                <div class="row mt-2 justify-content-md-center">
-                    <figure class="figure">
-                        <div id="barchart" style="border: 1px solid #ccc" class="rounded"></div>
-                        <figcaption class="figure-caption text-middle">A bar chart of number of comments by user names.</figcaption>
-                    </figure>
-                </div>
+               
             </div>
 
   
             <!-- The tab for the projects I did -->
             <div class="container-fluid tab-pane fade" role="tabpanel" aria-labelledby="tab-projects" id="projects"> 
-                <div class="row justify-content-md-start">
-                    <h2>Projects</h2>
+                <div class="row my-2 justify-content-md-center">
+                    <div class="tab-font">Projects</div>
+                </div>
+
+                <div class="row my-3 justify-content-md-center">
+                    <img class="img-fluid center", src="images/divider.png"/>
                 </div>
 
                 <!-- Add the projects with collapible description. -->
-                <div class="row justify-content-md-center">
+                <div class="row my -2 justify-content-md-center">
                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 center-block text-center">  
                         <div class="collapsible btn border border-info"><h3>Minibot Blockly Data Analytics</h3></div>
                         <div class="collapse-content">
@@ -191,10 +134,14 @@
             <div class="container-fluid tab-pane fade" role="tabpanel" aria-labelledby="tab-gallery" id="gallery"> 
                 <div class="container-fluid"> 
                     <div class="row my-2 justify-content-md-center">
-                        <h4>The gallery contains photos I took and photos of me.</h4>
+                        <div class="tab-font">Photo Gallery</div><br><br>
+                    </div>
+
+                     <div class="row my-3 justify-content-md-center">
+                        <img class="img-fluid center", src="images/divider.png"/>
                     </div>
                     
-                    <div class="row justify-content-md-center">
+                    <div class="row my-2 justify-content-md-center">
                         <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 center-block text-center align-middle">  
                             <img class="img-fluid img-thumbnail rounded" src="images/IMG_2002.jpg"/>
                         </div>
@@ -227,8 +174,12 @@
                             <img class="img-fluid img-thumbnail rounded" src="images/DSC03876.jpg"/>
                         </div>
                         <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 center-block text-center align-middle"> 
-                            <img class="img-fluid img-thumbnail rounded" src="images/IMG_1243.jpg"/>
+                            <img class="img-fluid img-thumbnail rounded" src="images/IMG_2617-3.jpg"/>
                         </div>
+                    </div>
+
+                     <div class="row my-3 justify-content-md-center">
+                        <img class="img-fluid center", src="images/divider.png"/>
                     </div>
 
                     <div class="row mt-5 my-2 justify-content-md-center">
@@ -242,6 +193,88 @@
                     </div>
                      
                 </div>
+            </div>
+
+             <!-- The tab for comments -->
+            <div class="container-fluid tab-pane fade" role="tabpanel" aria-labelledby="tab-comment" id="comment"> 
+                <div class="row my-2 justify-content-md-center">
+                    <div class="tab-font">Comments</div><br>
+                </div>
+
+                <div class="row my-3 justify-content-md-center">
+                    <img class="img-fluid center", src="images/divider.png"/>
+                </div>
+
+                <div class="row my-1 justify-content-center">
+                    <label for="num"> Number of comments to display (between 5 and 10):</label>
+                    <input type="number" id="num" name="num" min="5" max="10" onchange="setNum(this)">
+                </div>
+
+                <div class="row my-1 justify-content-center">
+                    <label> Ordered by: </label>
+                     <select id="orders">
+                        <option value="descending">Descending Time</option>
+                        <option value="ascending">Ascending Time</option>
+                    </select>
+                </div>
+
+               <div class="row my-1 justify-content-center">
+                    <div class="pagination">
+                        <button class="pagebtn" id="prev" onclick="prev()">&laquo;</button>
+                        <button class="pagebtn active">1</button>
+                        <button class="pagebtn">2</button>
+                        <button class="pagebtn">3</button>
+                        <button class="pagebtn">4</button>
+                        <button class="pagebtn">5</button>
+                        <button class="pagebtn" id="next" onclick="next()">&raquo;</button>
+                    </div>
+                </div>
+
+                <div class="row my-1 justify-content-center">
+                    <input class="button btn-primary" type="button" value="Clear Comments" onclick="deleteData()"></input>
+                </div>
+                
+                 <div class="row my-1 justify-content-md-center">
+                    <div id="comments-container"><p></P></div>
+                </div>
+
+                <div class="row my-3 justify-content-md-center">
+                    <img class="img-fluid center", src="images/divider.png"/>
+                </div>
+                
+                 <div class="row my-1 justify-content-md-center">
+                    <div id="login-container">
+                        <p>Please login to post comments!</P>
+                        <a href="" id="loginURL"><button class="button btn-primary">Login</button></a>
+                    </div>
+                    <div id="logout-container">
+                        <a href="" id="logoutURL"><button class="button btn-primary">Logout</button></a>
+                    </div>
+                </div>
+
+                 <div class="row justify-content-md-center mb-4 my-1" id="post-comment-container">
+                     <form action="/post-comment" method="POST">
+                        <br>
+                        <h4>Enter Your Comment Here</h4>
+                        <label>User Name: </label><input type="text" name="user-name"><br/>
+                        <!-- <label>Email Address: </label><input type="text" name="email"><br/> -->
+                        <label>Comment: </label><textarea type="text" name="content"></textarea>
+                        <br/><br/>
+                        <input type="submit"/>
+                    </form>
+                </div>
+
+                <div class="row my-3 justify-content-md-center">
+                    <img class="img-fluid center", src="images/divider.png"/>
+                </div>
+
+                <div class="row mt-2 justify-content-md-center">
+                    <figure class="figure">
+                        <div id="barchart" style="border: 1px solid #ccc" class="rounded"></div>
+                        <figcaption class="figure-caption text-middle">A bar chart of number of comments by user names.</figcaption>
+                    </figure>
+                </div>
+                
             </div>
         </div>
             
