@@ -70,14 +70,15 @@ function getData(num) {
     }
   }
   fetch('/get-comments?num=' + num + '&page=' + pageString + '&order=' + order).then(response => response.json()).then((comments) =>  {
-    console.log(comments);
     const commentListElement = document.getElementById('comments-container');
     commentListElement.innerHTML="";
     if(comments.length === 0){
         commentListElement.innerText="No comment on this page.";   
     } else{
         comments.forEach((comment) => {
-        commentListElement.appendChild(createListElement(comment));
+            createListElement(comment).then((commentElement) => {
+                commentListElement.appendChild(commentElement);
+            })
         })
     }
   });
@@ -96,29 +97,45 @@ function createListElement(text) {
   var contentElement = document.createElement('div');
   contentElement.classList.add('row');
   var date = new Date(text.timestamp);
-  contentElement.innerText = "Email: " + text.email + "\nTime: " + date.toLocaleString() + "\n" + "Comment: " + text.content + "\n";
-  var deleteBtn = document.createElement("BUTTON");   // Create a <button> element
-  deleteBtn.classList.add('row');
-  deleteBtn.classList.add('close-button');
-  deleteBtn.innerHTML = "delete";   
-  deleteBtn.onclick = function() { 
-      fetch("/delete-id?id=" + text.id, {method: 'POST'})
-        .then(response => {
-            if (response.status === 200) {
-            console.log("delete one comment");
-            getData(5);
-            return response.json();
-            } else {
-            console.log("fail");
-            throw new Error('Something went wrong on api server!');
-            }
-        });
+  var score;
+  return getScore(text.content).then((result)  => {
+    score = result.toFixed(2);
+    var emoji;
+    if(score >= 0.8){
+        emoji = "🥰";
+    } else if(score >= 0.6){
+        emoji = "😊";
+    } else if(score >= 0.4){
+        emoji = "😐";
+    } else if(score >= 0.2){
+        emoji = "🙁";
+    } else{
+        emoji = "😭";
     }
-  cardBody.appendChild(cardTitle);
-  cardBody.appendChild(contentElement);
-  cardBody.appendChild(deleteBtn);
-  liElement.appendChild(cardBody);
-  return liElement;
+    contentElement.innerText = "Email: " + text.email + "\nTime: " + date.toLocaleString() + "\n" + "Comment: " + text.content + "\nScore: " + score + " " + emoji;
+    var deleteBtn = document.createElement("BUTTON");   // Create a <button> element
+    deleteBtn.classList.add('row');
+    deleteBtn.classList.add('close-button');
+    deleteBtn.innerHTML = "delete";   
+    deleteBtn.onclick = function() { 
+        fetch("/delete-id?id=" + text.id, {method: 'POST'})
+            .then(response => {
+                if (response.status === 200) {
+                console.log("delete one comment");
+                getData(5);
+                return response.json();
+                } else {
+                console.log("fail");
+                throw new Error('Something went wrong on api server!');
+                }
+            });
+        }
+    cardBody.appendChild(cardTitle);
+    cardBody.appendChild(contentElement);
+    cardBody.appendChild(deleteBtn);
+    liElement.appendChild(cardBody);
+    return liElement;
+    });  
 }
 
 /** Create a new page button. */
@@ -291,7 +308,6 @@ function isLoggedIn(){
         }).then(response => response.json()).then((loginstatus) =>  {
         console.log(loginstatus);
         if(loginstatus.loginStatus === true){
-            console.log("logintrue");
             var commentElement = document.getElementById('post-comment-container');
             commentElement.style.visibility = "visible";
             var loginElement = document.getElementById('login-container');
@@ -302,7 +318,6 @@ function isLoggedIn(){
             logoutURL.href = loginstatus.URL;
         }
         else{
-            console.log("loginfalse");
             var commentElement = document.getElementById('post-comment-container');
             commentElement.style.visibility = "hidden";
             var loginElement = document.getElementById('login-container');
@@ -313,7 +328,18 @@ function isLoggedIn(){
             loginURL.href = loginstatus.URL;
         }
     });
+}
 
+function getScore(message, callback){
+    return fetch('/sentiment?message=' + message, {method: 'POST'})
+        .then(response => {
+            return response.json().then((result) =>  {
+                return result.score;
+            })
+            .catch(error => {
+                console.warn(error);
+            })
+        }); 
 }
 
 
