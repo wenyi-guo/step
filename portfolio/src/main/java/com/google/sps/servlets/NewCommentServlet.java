@@ -48,6 +48,6 @@ public class NewCommentServlet extends HttpServlet {
     DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
     datastore.put(comment);
 
-    response.sendRedirect("/index.html");
+    response.sendRedirect("/comments.html");
   }
 }

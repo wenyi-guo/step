@@ -28,14 +28,14 @@ public class AuthServlet extends HttpServlet {
     JSONObject obj = new JSONObject();
     if (userService.isUserLoggedIn()) {
         isLoggedIn = true;
-        String urlToRedirectToAfterUserLogsOut = "/";
+        String urlToRedirectToAfterUserLogsOut = "/comments.html";
         String logoutUrl = userService.createLogoutURL(urlToRedirectToAfterUserLogsOut);
         obj.put("loginStatus", isLoggedIn);
         obj.put("URL", logoutUrl);
         response.getWriter().println(obj);
     } else {
         isLoggedIn = false;
-        String urlToRedirectToAfterUserLogsIn = "/";
+        String urlToRedirectToAfterUserLogsIn = "/comments.html";
         String loginUrl = userService.createLoginURL(urlToRedirectToAfterUserLogsIn);
         obj.put("loginStatus", isLoggedIn);
         obj.put("URL", loginUrl);

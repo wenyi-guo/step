@@ -12,46 +12,71 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-/** The functions called onload */
-function start(){
-    getData(5);
-    changePage();
-    isLoggedIn();
-}
-
+/** Global variables */
 var number = 5; // default max number of comments in one page
 var order = "descending"; // default order
+var pageClass;
+var pagination;
 
-/** Get the order from user select */
-const myorders = document.getElementById("orders");
-myorders.addEventListener("change", function(){
-  var e = document.getElementById("orders");
-  var selectedOrder = e.options[e.selectedIndex].value;
-  if (selectedOrder === "descending") {
-    order = "descending";
-  }
-  else{
-    order = "ascending";
-  }
-  getData(number);
-});
-
-
-/** Add collapse content to the collapsible buttons. */
-var collapse = document.getElementsByClassName("collapsible");
-var i;
-// Add collapse function to each collapsible button
-for (i = 0; i < collapse.length; i++) {
-  collapse[i].addEventListener("click", function() {
-    this.classList.toggle("collapse-active");
-    var content = this.nextElementSibling;
-    if (content.style.maxHeight) {
-      content.style.maxHeight = null;
-    } else {
-      content.style.maxHeight = content.scrollHeight + "px";
+/** The functions called onload */
+function start(page){
+    switch(page) {
+        case "index":
+            break;
+        case "projects":
+            collapse();
+            break;
+        case "gallery":
+            setupGeoChart();
+            break;
+        case "comments":
+            createPagination();
+            getOrder();
+            getData(5);
+            isLoggedIn();
+            setupBarChart(); 
+            break;
+        default:
+            break;
     }
-  });
+   
 }
+
+/** Collapse the projects description. */
+function collapse(){
+    /** Add collapse content to the collapsible buttons. */
+    var collapse = document.getElementsByClassName("collapsible");
+    var i;
+    // Add collapse function to each collapsible button
+    for (i = 0; i < collapse.length; i++) {
+    collapse[i].addEventListener("click", function() {
+        this.classList.toggle("collapse-active");
+        var content = this.nextElementSibling;
+        if (content.style.maxHeight) {
+        content.style.maxHeight = null;
+        } else {
+        content.style.maxHeight = content.scrollHeight + "px";
+        }
+    });
+    }
+}
+
+/** Get the order from user select. */
+function getOrder(){
+    const myorders = document.getElementById("orders");
+    myorders.addEventListener("change", function(){
+        var e = document.getElementById("orders");
+        var selectedOrder = e.options[e.selectedIndex].value;
+        if (selectedOrder === "descending") {
+            order = "descending";
+        }
+        else{
+            order = "ascending";
+        }
+        getData(number);
+    });
+}
+
 
 /** Set the number of comments to view. */
 function setNum(num){
@@ -101,13 +126,13 @@ function createListElement(text) {
   return getScore(text.content).then((result)  => {
     score = result.toFixed(2);
     var emoji;
-    if(score >= 0.8){
+    if(score >= 0.6){
         emoji = "🥰";
-    } else if(score >= 0.6){
-        emoji = "😊";
-    } else if(score >= 0.4){
-        emoji = "😐";
     } else if(score >= 0.2){
+        emoji = "😊";
+    } else if(score >= -0.2){
+        emoji = "😐";
+    } else if(score >= -0.6){
         emoji = "🙁";
     } else{
         emoji = "😭";
@@ -153,6 +178,7 @@ fetch("delete-comments", {method: 'POST'})
     if (response.status === 200) {
       console.log("success");
       getData(5);
+      setupBarChart();
       return response.json();
     } else {
       console.log("fail");
@@ -161,9 +187,12 @@ fetch("delete-comments", {method: 'POST'})
   });
 }
 
-/** Pagination feature */
-var pageClass = document.getElementsByClassName("pagination")[0];
-var pagination = document.getElementsByClassName("pagination")[0].children;
+
+function createPagination() {
+    pageClass = document.getElementsByClassName("pagination")[0];
+    pagination = document.getElementsByClassName("pagination")[0].children;
+    changePage();
+}
 
 // handle prev 
 function prev(){
@@ -228,29 +257,107 @@ function changePage(){
     }
 }
 
-/** Google Chart API. */
- google.charts.load('current', {
-        'packages':['corechart', 'geochart'],
-        'mapsApiKey': 'AIzaSyB9U6xT4W3gkESOvA8Sn_kU_aCPZjTh1f4'
-      });
-google.charts.setOnLoadCallback(drawCharts);
+/** Set up the chart API and call the drawcharts function. */
+function setupBarChart() {
+    /** Google Chart API. */
+    google.charts.load('current', {
+            'packages':['corechart'],
+        });
+    google.charts.setOnLoadCallback(drawBarChart);
+}
 
+function setupGeoChart() {
+    /** Google Chart API. */
+    google.charts.load('current', {
+            'packages':['corechart', 'geochart'],
+            'mapsApiKey': 'AIzaSyB9U6xT4W3gkESOvA8Sn_kU_aCPZjTh1f4'
+        });
+    google.charts.setOnLoadCallback(drawGeoChart);
+}
 
+function drawBarChart() {
+    fetch('/get-all-comments').then(response => response.json())
+    .then((comments) => {
+        const data = new google.visualization.DataTable();
+        data.addColumn('string', 'Username');
+        data.addColumn('number', 'Number of Comments');
+        comments.forEach((comment) => {
+            var row = data.getFilteredRows([{column: 0, value: comment.userName}])
+            if(row === undefined || row === null || row.length == 0){
+                data.addRow([comment.userName, 1]);
+            }
+            else{
+                data.setCell(row[0], 1, data.getValue(row[0], 1) +1);
+            }
+        })
+
+    var options = {
+          title: 'Comments Bar Chart',
+          width: 600,
+          height: 320,
+          legend: { position: 'none' },
+          chart: { title: 'Number of Comments by User Name',},
+          bars: 'horizontal', // Required for Material Bar Charts.
+          axes: {
+            x: {
+              0: { side: 'top', label: 'Number of Comments'} // Top x-axis.
+            }
+          },
+          bar: { groupWidth: "90%" },
+          style: {opacity: 0.5}
+        };
+
+    var view = new google.visualization.DataView(data);
+    view.setColumns([0, 1,
+                       { calc: "stringify",
+                         sourceColumn: 1,
+                         type: "string",
+                         role: "annotation" },
+                       ]);
+
+    var chart = new google.visualization.BarChart(document.getElementById("barchart"));
+    chart.draw(view, options);
+    });
+}
+
+function drawGeoChart() {
+    var data2 = google.visualization.arrayToDataTable([
+        ['Country', 'Been to'],
+        ['United States', 1],
+        ['China', 1],
+        ['Japan', 1],
+        ['Canada', 1],
+        ['France', 1],
+        ['Italy', 1],
+        ['United Kingdom', 1],
+        ['Australia', 1],
+    ]);
+
+    var options2 = {
+         width: 500,
+        height: 300,
+    };
+
+    var chart2 = new google.visualization.GeoChart(document.getElementById('geochart'));
+    chart2.draw(data2, options2);
+}
+
+/** Draw bar chart and geo chart. */
 function drawCharts() {
-  fetch('/get-all-comments').then(response => response.json())
-  .then((comments) => {
-    const data = new google.visualization.DataTable();
-    data.addColumn('string', 'Username');
-    data.addColumn('number', 'Number of Comments');
-    comments.forEach((comment) => {
-        var row = data.getFilteredRows([{column: 0, value: comment.userName}])
-        if(row === undefined || row === null || row.length == 0){
-            data.addRow([comment.userName, 1]);
-        }
-        else{
-            data.setCell(row[0], 1, data.getValue(row[0], 1) +1);
-        }
-    })
+    fetch('/get-all-comments').then(response => response.json())
+    .then((comments) => {
+        const data = new google.visualization.DataTable();
+        data.addColumn('string', 'Username');
+        data.addColumn('number', 'Number of Comments');
+        comments.forEach((comment) => {
+            var row = data.getFilteredRows([{column: 0, value: comment.userName}])
+            if(row === undefined || row === null || row.length == 0){
+                data.addRow([comment.userName, 1]);
+            }
+            else{
+                data.setCell(row[0], 1, data.getValue(row[0], 1) +1);
+            }
+        })
 
     var options = {
           title: 'Comments Bar Chart',

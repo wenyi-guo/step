@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>My Portfolio</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <meta charset="utf-8">
+  </head>
+  <body onload="start('gallery')">
+        <div class="portfolio-font">My Portfolio</div>
+            <!-- Create the tab-bar at the top -->
+            <div class="container-fluid navbar navbar-light fixed-top"> 
+                <ul class="nav nav-tabs" id="myTab" role="tablist" aria-label="tabs">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="projects.html">Projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="gallery.html">Gallery</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="comments.html">Comments</a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- The tab for image gallery -->
+            <div class="container-fluid tab-pane fade show active" role="tabpanel" aria-labelledby="tab-gallery" id="gallery"> 
+                <div class="container-fluid"> 
+                    <div class="row my-3 justify-content-md-center">
+                        <img class="img-fluid center", src="images/divider.png"/>
+                    </div>
+
+                    <div class="row my-2 justify-content-md-center">
+                        <div class="tab-font">Photo Gallery</div><br><br>
+                    </div>
+                    
+                    <div class="row my-2 justify-content-md-center">
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 center-block text-center align-middle">  
+                            <img class="img-fluid img-thumbnail rounded" src="images/IMG_2002.jpg"/>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 center-block text-center align-middle"> 
+                            <img class="img-fluid img-thumbnail rounded" src="images/IMG_2457.jpg"/>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 center-block text-center align-middle"> 
+                            <img class="img-fluid img-thumbnail rounded" src="images/IMG_2270.jpg"/>
+                        </div>
+                    </div>
+
+                    <div class="row justify-content-md-center">
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 center-block text-center align-middle"> 
+                            <img class="img-fluid img-thumbnail rounded" src="images/DSC03870.jpg"/>
+                            
+                        </div>
+                       <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 center-block text-center align-middle"> 
+                            <img class="img-fluid img-thumbnail rounded" src="images/IMG_2627_1.jpg"/>
+                        </div>
+                       <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 center-block text-center align-middle"> 
+                            <img class="img-fluid img-thumbnail rounded" src="images/IMG_2636_1.jpg"/>
+                        </div>
+                    </div>
+
+                    <div class="row justify-content-md-center">
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 center-block text-center align-middle"> 
+                            <img class="img-fluid img-thumbnail rounded" src="images/IMG_1969.jpg"/>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 center-block text-center align-middle"> 
+                            <img class="img-fluid img-thumbnail rounded" src="images/DSC03876.jpg"/>
+                        </div>
+                        <div class="col-xl-4 col-lg-4 col-md-6 col-sm-6 center-block text-center align-middle"> 
+                            <img class="img-fluid img-thumbnail rounded" src="images/IMG_2617-3.jpg"/>
+                        </div>
+                    </div>
+
+                     <div class="row my-3 justify-content-md-center">
+                        <img class="img-fluid center", src="images/divider.png"/>
+                    </div>
+
+                    <div class="row mt-5 my-2 justify-content-md-center">
+                        <h4>Places I have been to.</h4>
+                    </div>
+                    <div class="row my-2 justify-content-md-center">
+                        <figure class="figure">
+                            <div style="border: 1px solid #ccc" class="rounded"><div id="geochart"></div></div>
+                            <figcaption class="figure-caption text-middle">A geo chart showing the places I've been to.</figcaption>
+                        </figure>
+                    </div>
+                     
+                </div>
+            </div>
+        </div>
+
+  <script src="script.js"></script>
+  </body>
+</html>
