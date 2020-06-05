@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>My Portfolio</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://www.gstatic.com/charts/loader.js"></script>
+    <meta charset="utf-8">
+  </head>
+  <body onload="start('projects')">
+       <div class="portfolio-font">My Portfolio</div>
+            <!-- Create the tab-bar at the top -->
+            <div class="container-fluid navbar navbar-light fixed-top"> 
+                <ul class="nav nav-tabs" id="myTab" role="tablist" aria-label="tabs">
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.html">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link active" href="projects.html">Projects</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="gallery.html">Gallery</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="comments.html">Comments</a>
+                    </li>
+                </ul>
+            </div>
+
+                 
+            <!-- The tab for the projects I did -->
+            <div class="container-fluid tab-pane fade show active" role="tabpanel" aria-labelledby="tab-projects" id="projects"> 
+                 <div class="row my-3 justify-content-md-center">
+                    <img class="img-fluid center", src="images/divider.png"/>
+                </div>
+
+                <div class="row my-2 justify-content-md-center">
+                    <div class="tab-font">Projects</div>
+                </div>
+
+                <!-- Add the projects with collapible description. -->
+                <div class="row my -2 justify-content-md-center">
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 center-block text-center">  
+                        <div class="collapsible btn border border-info"><h3>Minibot Blockly Data Analytics</h3></div>
+                        <div class="collapse-content">
+                            <p>This is the project for Cornell Cup Robotics CS team, aiming to provide analytics based on the programs students write for Minibot. I implemented
+                                the user login feature and user dashboard which contains important statistics and visualizations about students' coding ability to help them
+                                improce.</p>
+                            <a href="https://github.com/cornell-cup/cs-reminibot">here</a>
+                        </div>
+                    </div>
+                    
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 center-block text-center">
+                        <div class="collapsible btn border border-info"><h3>LittleSecret</h3></div>
+                        <div class="collapse-content">
+                            <p>In LittleSecret, you can add your friends and share secrets with your friends without letting them know who you are. You can login first with
+                                registered email address. THen, you can post secress and add friends. You could see all the secret posts from your friends but you don't know
+                                who post them.
+                            </P>
+                            <a href="https://github.com/wenyi-guo/LittleSecret">here</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 center-block text-center">  
+                        <div class="collapsible btn border border-info "><h3>Freefood</h3></div>
+                        <div class="collapse-content">
+                            <p>freefood is an app that can be used to find the nearing events that offer freefood at Cornell. The user can just launch the app and see 
+                                what events at Cornell offer free food, and they can choose to only display the events at a certain part of the campus, they can also f
+                                ilter the events by dates for about one week's range. Users can click into the event to check the details and see the location of the event in Map.
+                                They can mark favourite events. 
+                                </p>
+                            <a href="https://github.com/Xiuyu-Li/freefood">here</a>
+                        </div>
+                    </div>
+                    
+                    <div class="col-xl-6 col-lg-6 col-md-6 col-sm-6 center-block text-center">
+                        <div class="collapsible btn border border-info"><h3>House Price Prediction</h3></div>
+                        <div class="collapse-content">
+                            <p>We aim to predict the future house sale prices given the data of house sale prices in Ames, Iowa based on 79 explanatory variables. The results 
+                            can be used for customers to decide whether they should invest an estate and how much profit they might earn from this investment in the future.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+  <script src="script.js"></script>
+  </body>
+</html>
