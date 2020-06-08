@@ -1,47 +1,48 @@
+body {
+    background-image: url('images/background.jpeg');
+}
+
+html,body {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
 /* Style the center class to center the text inside. */
 .center {
     text-align: center;
 }
 
-/* Style the container-fluid to be center in range in the middle. */
+/* Style the content to be center in range in the middle. */
+.content {
+    background-color: white;
+    max-width: 1200px;
+    padding: 20px;
+    margin: auto;
+    flex-grow: 1;
+}
+
+
+/* 
 .container-fluid {
     width: 65%;
+} */
+
+.project-header:after {
+    /* font-family: 'FontAwesome';   */
+    margin: 2px 2px;
+    font-size: 13px;
+    color: white;
+    text: white;
+    content: "\2796"; 
+    float: right; 
 }
 
-/* Style for animated collasible content, default is hidden,  */
-.collapse-content {
-  padding: 0 18px;
-  background-color: white;
-  max-height: 0;
-  width: 90%;
-  overflow: hidden;
-  transition: max-height 0.2s ease-out;
+.project-header.collapsed:after {
+    /* symbol for minus */
+    content: "\02795";
 }
 
-/* Style to add a plus sign for collapsible buttons when content is collapsing. */
-.collapsible:after {
-  content: '\02795'; /* Unicode character for "plus" sign (+) */
-  font-size: 13px;
-  color: white;
-  float: right;
-  margin-left: 5px;
-}
-
-/* Style to add a minus sign for collapsible buttons when content is showing. */
-.collapse-active:after {
-  content: "\2796"; /* Unicode character for "minus" sign (-) */
-}
-
-/* Style class btn to customize the button. */
-.btn {
-    width: 90%;
-    height: 100px;
-    text-align: center;
-    border-radius: 25px;
-    padding: 20px 20px;
-    margin: 30px;
-    background-color: #F0FFFF;
-}
 
 .btn-primary {
     background-color: #66ccff;
@@ -49,6 +50,10 @@
     border: none;
     margin: 0px 20px; 
     padding: 5px 5px;
+}
+
+.btn-primary:toggle {
+    background-color: #3f8fc4
 }
 
 .close-button {
@@ -113,6 +118,14 @@
 .tab-font {
     text-align: center;
     font-size: 2.10rem;
+    padding: 5px 5px;
+    margin: 5px 5px;
+    font-weight: 300;
+}
+
+.project-font {
+    text-align: center;
+    font-size: 1.88rem;
     padding: 5px 5px;
     margin: 5px 5px;
     font-weight: 300;

@@ -24,7 +24,6 @@ function start(page){
         case "index":
             break;
         case "projects":
-            collapse();
             break;
         case "gallery":
             setupGeoChart();
@@ -40,25 +39,6 @@ function start(page){
             break;
     }
    
-}
-
-/** Collapse the projects description. */
-function collapse(){
-    /** Add collapse content to the collapsible buttons. */
-    var collapse = document.getElementsByClassName("collapsible");
-    var i;
-    // Add collapse function to each collapsible button
-    for (i = 0; i < collapse.length; i++) {
-    collapse[i].addEventListener("click", function() {
-        this.classList.toggle("collapse-active");
-        var content = this.nextElementSibling;
-        if (content.style.maxHeight) {
-        content.style.maxHeight = null;
-        } else {
-        content.style.maxHeight = content.scrollHeight + "px";
-        }
-    });
-    }
 }
 
 /** Get the order from user select. */
@@ -400,8 +380,8 @@ function drawCharts() {
     ]);
 
     var options2 = {
-         width: 500,
-        height: 300,
+        width: 1000,
+        height: 750,
     };
 
     var chart2 = new google.visualization.GeoChart(document.getElementById('geochart'));
