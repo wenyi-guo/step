@@ -12,9 +12,9 @@
     <meta charset="utf-8">
   </head>
   <body onload="start('index')">
-    <div class="portfolio-font">My Portfolio</div>
+    <div class="content container-fluid ">
         <!-- Create the tab-bar at the top -->
-        <div class="container-fluid navbar navbar-light fixed-top"> 
+        <div class="navbar navbar-dark fixed-top content"> 
             <ul class="nav nav-tabs" id="myTab" role="tablist" aria-label="tabs">
                 <li class="nav-item">
                     <a class="nav-link active" href="index.html">About</a>
@@ -32,45 +32,46 @@
         </div>
 
         <!-- Add the tab content for three tabs -->
-        <div class="tab-content">
-            <!-- The tab for about me information -->
-            <!-- fade show active -->
-            <div class="container-fluid tab-pane fade show active" role="tabpanel" id="about"> 
-                <div class="row my-3 justify-content-md-center">
-                    <img class="img-fluid center", src="images/divider.png"/>
+    
+        <!-- The tab for about me information -->
+        <!-- fade show active -->
+        <div class="tab-pane fade show active" role="tabpanel" id="about"> 
+            <div class="row my-3 justify-content-md-center">
+                <img class="img-fluid center", src="images/divider.png"/>
+            </div>
+
+            <div class="row my-2 justify-content-md-center">
+                <div class="tab-font">About</div>
+            </div>
+
+            <div class="row my-2 justify-content-md-center">
+                <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 align-middle">
+                    <img class="img-fluid img-thumbnail rounded" height=512, width=341.25, src="images/DSC04294.jpg"/>
                 </div>
+                <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8 align-middle">
+                    <br><br>
+                    <p>Hi, this is Wenyi Guo! </p>
+                    
+                    <p>I'm an undergraduate stuent at Cornell University class of 2022. My majors are computer science and mathematics. 
+                        I like programming as well as the theoratical knowledge.</p>
+                    <p>I'm a developer, a programmer,a dancer, a photographer, and a learner. I hope to create a better world with new ideas;
+                        I hope to build more convenient tools with coding; I hope everywhere I dance will grow flowers; I hope every scene 
+                        I shot would be eternal.</p>
+                    <p>I love cats but I don' have one. </p>
+                    <P>I love travelling and have been to many places. You can check the places I've been to in the Gallery tab. </p>
 
-                <div class="row my-2 justify-content-md-center">
-                    <div class="tab-font">About</div>
-                </div>
+                    <br><br><br>
 
-                <div class="row my-2 justify-content-md-center">
-                    <div class="col-xl-4 col-lg-4 col-md-4 col-sm-4 align-middle">
-                        <img class="img-fluid img-thumbnail rounded" height=512, width=341.25, src="images/DSC04294.jpg"/>
-                    </div>
-                    <div class="col-xl-8 col-lg-8 col-md-8 col-sm-8 align-middle">
-                        <br><br>
-                        <p>Hi, this is Wenyi Guo! </p>
-                        
-                        <p>I'm an undergraduate stuent at Cornell University class of 2022. My majors are computer science and mathematics. 
-                            I like programming as well as the theoratical knowledge.</p>
-                        <p>I'm a developer, a programmer,a dancer, a photographer, and a learner. I hope to create a better world with new ideas;
-                            I hope to build more convenient tools with coding; I hope everywhere I dance will grow flowers; I hope every scene 
-                            I shot would be eternal.</p>
-                        <p>I love cats but I don' have one. </p>
-                        <P>I love travelling and have been to many places. You can check the places I've been to in the Gallery tab. </p>
-
-                        <br><br><br>
-
-                        <p><a href="https://linkedin.com/in/wenyiguo~/">Connect me on LinkedIn</a></br>
-                        <a href="https://github.com/wenyi-guo">Check out my github</a></p>
-                        <br><br>
-                    </div>
+                    <p><a href="https://linkedin.com/in/wenyiguo~/">Connect me on LinkedIn</a></br>
+                    <a href="https://github.com/wenyi-guo">Check out my github</a></p>
                     <br><br>
                 </div>
+                <br><br>
             </div>
         </div>
+      
     </div>
+
   <script src="script.js"></script>
   </body>
 </html>
