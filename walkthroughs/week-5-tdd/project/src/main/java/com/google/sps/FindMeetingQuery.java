@@ -15,36 +15,44 @@
 package com.google.sps;
 
 import java.util.*;
+import java.util.Arrays;
+import java.util.Collections;
 
+    
 public final class FindMeetingQuery {
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
     Set<TimeRange> busyTimes = new HashSet<>(); // a set of busy time of all attendees, containing overlaps
     Collection<TimeRange> availables = new ArrayList<>();
+    Collection<TimeRange> optionalAvailables = new ArrayList<>();
     Collection<String> attendees = request.getAttendees();
+    Collection<String> optionalAttendees = request.getOptionalAttendees();
     long duration = request.getDuration();
 
+    // fill the busyTimes with mandatory attendees' events
     Iterator<Event> eventsIterator = events.iterator();
     while(eventsIterator.hasNext()){
         Event event = eventsIterator.next();
         Set<String> eventAttendees = event.getAttendees();
-        // check if the any attendee of the event is in the request attendees 
+        // check if the any mandatory attendee of the event is in the request attendees 
         if(Collections.disjoint(attendees, eventAttendees) == false){
             TimeRange when = event.getWhen();
             busyTimes.add(when);
         }
     }
-
+    
     // sort the busyTimes by start time
     List<TimeRange> busyTimesList = new ArrayList<TimeRange>();
     busyTimesList.addAll(busyTimes);
     Collections.sort(busyTimesList, TimeRange.ORDER_BY_START);
 
-    // get the available time ranges
+    // duration too long no available slots
     if(duration > TimeRange.WHOLE_DAY.duration()){
-        return  Arrays.asList();
+        return Arrays.asList();
     }
+
+    // no busy time
     if(busyTimesList.size() == 0){
-        return Arrays.asList(TimeRange.WHOLE_DAY);
+        availables = Arrays.asList(TimeRange.WHOLE_DAY);
     }
     else{
         // check time before all busy times
@@ -74,6 +82,69 @@ public final class FindMeetingQuery {
         }
     }
 
+    /** optimized optional attendees */
+    // create an array representing the minutes for the whole day, array[i] indicates at minute i, the number of attendees who are busy
+    int[] array = new int[1440]; 
+    Arrays.fill(array, 0);
+    Iterator<Event> newEventsIterator = events.iterator();
+    while(newEventsIterator.hasNext()){
+        Event event = newEventsIterator.next();
+        Set<String> eventAttendees = event.getAttendees();
+        Set<String> copy = new HashSet<>(eventAttendees);
+        copy.retainAll(optionalAttendees);
+        if(copy.size() != 0){
+            for(int i = event.getWhen().start(); i < event.getWhen().end(); i++){
+                array[i] = array[i] + eventAttendees.size();
+            }
+        }
+    }
+
+    // find slots work for both mandatory and optional attendees
+    optionalAvailables = availablesByNumber(duration, array, availables, 0);
+
+    // if slots exist for both mandatory and optional attendees
+    if(optionalAvailables.size() != 0){
+        return optionalAvailables;
+    }
+    // if slot doesn't exist for both, return optimized: allow mandatory attendees and the greatest possible number of optional attendees 
+    int max = 0;
+    for(int i = 0; i < array.length; i++){
+        if(array[i] > max)
+            max = array[i];
+    }
+    int k = 1;
+    while(k <= max){
+        optionalAvailables = availablesByNumber(duration, array, availables, k);
+        if(optionalAvailables.size() != 0){
+            return optionalAvailables;
+        }
+        k++;
+    } 
     return availables;
+  }
+
+  /** The function returns all the timeslots available while n optional attendees can't attend. */
+  public Collection<TimeRange> availablesByNumber(long duration, int[] array, Collection<TimeRange> availables, int n){
+    Collection<TimeRange> numOptionalAvailables = new ArrayList<>();
+    Iterator<TimeRange> availablesIterator = availables.iterator();
+    while(availablesIterator.hasNext()){
+        TimeRange available = availablesIterator.next();
+        int i = available.start();
+        while(i < available.end()){
+            if(array[i] <= n){
+                int s = i;
+                while(i+1 < available.end() && array[i+1] <= n){
+                    i++;
+                }
+                if(i - s + 1 >= duration){
+                    numOptionalAvailables.add(TimeRange.fromStartEnd(s, i, true));
+                }
+            }
+            if(i < available.end()){
+                i++;
+            }
+        }
+    }
+    return numOptionalAvailables;
   }
 }
