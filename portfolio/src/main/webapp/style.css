@@ -20,6 +20,7 @@ html,body {
     padding: 20px;
     margin: auto;
     flex-grow: 1;
+    font-size: 20px;
 }
 
 
@@ -43,6 +44,15 @@ html,body {
     content: "\02795";
 }
 
+#contact a {
+    color: #282828;
+    display: block;
+    font-size: 18px;
+    margin: 5px 5px;
+}
+#contact a i{
+    font-size: 30px;
+}
 
 .btn-primary {
     background-color: #66ccff;
